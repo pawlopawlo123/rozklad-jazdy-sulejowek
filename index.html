@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rozkład jazdy Autobusów w Sulejówku</title>
   <style>
+    .time {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: underline;
+  margin: 0 4px;
+}
+div {
+  line-height: 1.6;
+}
     body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f4f4f4; }
     h1 { text-align: center; }
     .container { max-width: 650px; margin: 0 auto; }
@@ -300,17 +309,35 @@
     }
 
     function showSchedule() {
-      const stop = stopSelect.value;
-      const times = scheduleData[stop] || [];
-      scheduleDiv.innerHTML = times.length
-        ? "<strong>Odjazdy (kliknij w minutę):</strong><br>" +
-          times.map(t => {
-            const [h, m] = t.split(":");
-            return `<span class='time'>${h}:<u onclick='showRoute("${t}")'>${m}</u></span>`;
-          }).join("<br>")
-        : "<p>Brak danych o rozkładzie.</p>";
-      routeDiv.innerHTML = "";
-    }
+  const stop = stopSelect.value;
+  const times = scheduleData[stop] || [];
+  if (!times.length) {
+    scheduleDiv.innerHTML = "<p>Brak danych o rozkładzie.</p>";
+    routeDiv.innerHTML = "";
+    return;
+  }
+
+  // Grupowanie minut wg godzin
+  const grouped = {};
+  times.forEach(t => {
+    const [h, m] = t.split(":");
+    if (!grouped[h]) grouped[h] = [];
+    grouped[h].push(m);
+  });
+
+  let html = "<strong>Odjazdy (kliknij w minutę):</strong><br>";
+  for (const hour in grouped) {
+    html += `<div><b>${hour}</b> `;
+    html += grouped[hour]
+      .map(m => `<u class="time" onclick='showRoute("${hour}:${m}")'>${m}</u>`)
+      .join(" ");
+    html += "</div>";
+  }
+
+  scheduleDiv.innerHTML = html;
+  routeDiv.innerHTML = "";
+}
+
 
     function showRoute(time) {
       const line = lineSelect.value;
@@ -347,4 +374,5 @@
   </script>
 </body>
 </html>
+
 
