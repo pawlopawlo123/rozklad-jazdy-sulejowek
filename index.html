@@ -317,27 +317,27 @@ div {
     return;
   }
 
-  // Grupowanie minut wg godzin
-  const grouped = {};
+  // Grupowanie, ALE z zachowaniem oryginalnej kolejności z scheduleData
+  const grouped = [];
   times.forEach(t => {
     const [h, m] = t.split(":");
-    if (!grouped[h]) grouped[h] = [];
-    grouped[h].push(m);
+    let group = grouped.find(g => g.hour === h);
+    if (!group) {
+      group = { hour: h, minutes: [] };
+      grouped.push(group);
+    }
+    group.minutes.push(m);
   });
 
-  // Sortowanie godzin i minut
-  const sortedHours = Object.keys(grouped).sort((a, b) => Number(a) - Number(b));
-  sortedHours.forEach(h => grouped[h].sort((a, b) => Number(a) - Number(b)));
-
-  // Tworzenie HTML w kolejności rosnącej
+  // Tworzymy HTML w dokładnej kolejności, jak w danych
   let html = "<strong>Odjazdy (kliknij w minutę):</strong><br>";
-  for (const hour of sortedHours) {
-    html += `<div><b>${hour}</b> `;
-    html += grouped[hour]
-      .map(m => `<u class="time" onclick='showRoute("${hour}:${m}")'>${m}</u>`)
+  grouped.forEach(g => {
+    html += `<div><b>${g.hour}</b> `;
+    html += g.minutes
+      .map(m => `<u class="time" onclick='showRoute("${g.hour}:${m}")'>${m}</u>`)
       .join(" ");
     html += "</div>";
-  }
+  });
 
   scheduleDiv.innerHTML = html;
   routeDiv.innerHTML = "";
@@ -378,6 +378,7 @@ div {
   </script>
 </body>
 </html>
+
 
 
 
