@@ -325,8 +325,13 @@ div {
     grouped[h].push(m);
   });
 
+  // Sortowanie godzin i minut
+  const sortedHours = Object.keys(grouped).sort((a, b) => Number(a) - Number(b));
+  sortedHours.forEach(h => grouped[h].sort((a, b) => Number(a) - Number(b)));
+
+  // Tworzenie HTML w kolejności rosnącej
   let html = "<strong>Odjazdy (kliknij w minutę):</strong><br>";
-  for (const hour in grouped) {
+  for (const hour of sortedHours) {
     html += `<div><b>${hour}</b> `;
     html += grouped[hour]
       .map(m => `<u class="time" onclick='showRoute("${hour}:${m}")'>${m}</u>`)
@@ -338,8 +343,7 @@ div {
   routeDiv.innerHTML = "";
 }
 
-
-    function showRoute(time) {
+      function showRoute(time) {
       const line = lineSelect.value;
       const stops = lineStops[line] || [];
       routeDiv.innerHTML = "";
@@ -374,5 +378,6 @@ div {
   </script>
 </body>
 </html>
+
 
 
