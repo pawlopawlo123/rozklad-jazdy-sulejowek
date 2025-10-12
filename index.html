@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="pl">
-<head><link rel="manifest" href="manifest.json">
+{<head>
+  <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#f0c000">
+  }
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rozkład jazdy Autobusów w Sulejówku</title>
@@ -377,13 +379,12 @@
   </script>
   <script>
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('service-worker.js')
-    .catch(err => console.log('SW registration failed:', err));
-}
+  navigator.serviceWorker.register('service-worker.js');
+  }
 </script>
-
 </body>
 </html>
+
 
 
 
