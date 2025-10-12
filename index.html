@@ -1,60 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <style>
-  /* ---- MOTYWY ---- */
-  :root {
-    --bg-color: #ffffff;
-    --text-color: #000000;
-    --card-bg: #f9f9f9;
-    --border-color: #ccc;
-  }
-
-  [data-theme="dark"] {
-    --bg-color: #121212;
-    --text-color: #ffffff;
-    --card-bg: #1e1e1e;
-    --border-color: #333;
-  }
-
-  body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    transition: background-color 0.3s, color 0.3s;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-
-  /* Ogólne elementy */
-  table, .card, .stop, .route {
-    background-color: var(--card-bg);
-    color: var(--text-color);
-    border: 1px solid var(--border-color);
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-  }
-
-  a, button, .minute {
-    color: var(--text-color);
-  }
-
-  /* Przycisk zmiany motywu */
-  .theme-toggle {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: var(--text-color);
-  }
-
-  .theme-toggle:hover {
-    opacity: 0.7;
-  }
-</style>
-  <link rel="manifest" href="manifest.json">
+<link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#f0c000">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -75,7 +22,6 @@
   </style>
 </head>
 <body>
-  <button class="theme-toggle" id="theme-toggle" title="Zmień motyw">🌙</button>
   <div class="container">
     <h1>Rozkład jazdy Autobusów w Sulejówku</h1>
 
@@ -435,26 +381,9 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js');
   }
 </script>
-    <script>
-  const toggleButton = document.getElementById('theme-toggle');
-  const currentTheme = localStorage.getItem('theme');
-
-  // Jeśli wcześniej zapisano motyw, ustaw go
-  if (currentTheme) {
-    document.documentElement.setAttribute('data-theme', currentTheme);
-    toggleButton.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
-  }
-
-  // Po kliknięciu zmień motyw i zapisz go
-  toggleButton.addEventListener('click', () => {
-    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-    toggleButton.textContent = theme === 'dark' ? '☀️' : '🌙';
-  });
-</script>
 </body>
 </html>
+
 
 
 
