@@ -1,6 +1,6 @@
 {
   "name": "Rozkład Sulejówek",
-  "short_name": "Rozkład",
+  "short_name": "Rozkład Sulejówek",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
