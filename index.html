@@ -381,35 +381,9 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js');
   }
 </script>
-    <script>
-  const toggleButton = document.getElementById('theme-toggle');
-  const savedTheme = localStorage.getItem('theme');
-
-  // Ustal aktualną godzinę
-  const hour = new Date().getHours();
-
-  // Jeśli nie ma zapisanego motywu, ustaw automatycznie wg godziny
-  if (!savedTheme) {
-    const autoTheme = (hour >= 18 || hour < 6) ? 'dark' : 'light';
-    document.documentElement.setAttribute('data-theme', autoTheme);
-    localStorage.setItem('theme', autoTheme);
-    toggleButton.textContent = autoTheme === 'dark' ? '☀️' : '🌙';
-  } else {
-    // Jeśli był zapisany motyw, ustaw go
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    toggleButton.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
-  }
-
-  // Po kliknięciu zmień motyw i zapisz
-  toggleButton.addEventListener('click', () => {
-    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-    toggleButton.textContent = theme === 'dark' ? '☀️' : '🌙';
-  });
-</script>
 </body>
 </html>
+
 
 
 
