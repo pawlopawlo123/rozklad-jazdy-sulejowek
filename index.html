@@ -1,6 +1,53 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+  <style>
+  /* Ekran powitalny */
+  #intro-screen {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(180deg, #f0c000, #ffffff);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease;
+  }
+
+  #intro-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  #intro-screen h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #222;
+  }
+
+  #intro-screen p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  #enter-btn {
+    background-color: #222;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  #enter-btn:hover {
+    opacity: 0.8;
+  }
+</style>
+
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#f0c000">
   <meta charset="UTF-8">
@@ -22,6 +69,11 @@
   </style>
 </head>
 <body>
+  <div id="intro-screen">
+  <h1>🚍 Rozkład Sulejówek</h1>
+  <p>Witamy w aplikacji rozkładu jazdy!</p>
+  <button id="enter-btn">Przejdź do rozkładu</button>
+</div>
   <div class="container">
     <h1>Rozkład jazdy Autobusów w Sulejówku</h1>
 
@@ -381,8 +433,34 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js');
   }
 </script>
+    <script>
+  const intro = document.getElementById('intro-screen');
+  const enterBtn = document.getElementById('enter-btn');
+
+  // Sprawdź, czy użytkownik już widział intro
+  const seenIntro = localStorage.getItem('seenIntro');
+
+  if (seenIntro) {
+    intro.classList.add('hidden');
+  }
+
+  // Po kliknięciu przycisku ukryj intro i zapamiętaj
+  enterBtn.addEventListener('click', () => {
+    intro.classList.add('hidden');
+    localStorage.setItem('seenIntro', 'true');
+  });
+
+  // (Opcjonalnie) automatyczne ukrycie po kilku sekundach
+  setTimeout(() => {
+    if (!localStorage.getItem('seenIntro')) {
+      intro.classList.add('hidden');
+      localStorage.setItem('seenIntro', 'true');
+    }
+  }, 4000);
+</script>
 </body>
 </html>
+
 
 
 
