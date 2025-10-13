@@ -21,6 +21,12 @@
     pointer-events: none;
   }
 
+  #intro-logo {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 20px;
+  }
+
   #intro-screen h1 {
     font-size: 2rem;
     margin-bottom: 10px;
@@ -49,6 +55,7 @@
 </style>
 
 
+
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#f0c000">
   <meta charset="UTF-8">
@@ -70,7 +77,8 @@
   </style>
 </head>
 <body>
- <div id="intro-screen">
+<div id="intro-screen">
+  <img src="icon-192.png" alt="Logo aplikacji" id="intro-logo">
   <h1>🚍Rozkład Sulejówek🚍</h1>
   <p>Witamy w aplikacji rozkładu jazdy!</p>
   <button id="enter-btn">Przejdź do rozkładu</button>
@@ -445,6 +453,7 @@ if ('serviceWorker' in navigator) {
 </script>
 </body>
 </html>
+
 
 
 
