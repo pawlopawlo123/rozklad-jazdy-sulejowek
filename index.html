@@ -449,17 +449,28 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js');
   }
 </script>
-    <script>
+   <script>
   const intro = document.getElementById('intro-screen');
   const enterBtn = document.getElementById('enter-btn');
 
-  // Po kliknięciu — ukryj ekran i pokaż rozkład
+  // Sprawdź, czy ekran powitalny był już pokazany w tej sesji
+  const introShown = sessionStorage.getItem('introShown');
+
+  if (introShown === 'true') {
+    // Jeśli już pokazany — ukryj ekran
+    intro.classList.add('hidden');
+  }
+
+  // Po kliknięciu — ukryj ekran i zapamiętaj tylko dla tej sesji
   enterBtn.addEventListener('click', () => {
     intro.classList.add('hidden');
+    sessionStorage.setItem('introShown', 'true');
   });
 </script>
+
 </body>
 </html>
+
 
 
 
