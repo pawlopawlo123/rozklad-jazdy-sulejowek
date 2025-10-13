@@ -48,6 +48,7 @@
   }
 </style>
 
+
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#f0c000">
   <meta charset="UTF-8">
@@ -69,7 +70,7 @@
   </style>
 </head>
 <body>
-  <div id="intro-screen">
+ <div id="intro-screen">
   <h1>🚍 Rozkład Sulejówek</h1>
   <p>Witamy w aplikacji rozkładu jazdy!</p>
   <button id="enter-btn">Przejdź do rozkładu</button>
@@ -437,29 +438,14 @@ if ('serviceWorker' in navigator) {
   const intro = document.getElementById('intro-screen');
   const enterBtn = document.getElementById('enter-btn');
 
-  // Sprawdź, czy użytkownik już widział intro
-  const seenIntro = localStorage.getItem('seenIntro');
-
-  if (seenIntro) {
-    intro.classList.add('hidden');
-  }
-
-  // Po kliknięciu przycisku ukryj intro i zapamiętaj
+  // Po kliknięciu — ukryj ekran i pokaż rozkład
   enterBtn.addEventListener('click', () => {
     intro.classList.add('hidden');
-    localStorage.setItem('seenIntro', 'true');
   });
-
-  // (Opcjonalnie) automatyczne ukrycie po kilku sekundach
-  setTimeout(() => {
-    if (!localStorage.getItem('seenIntro')) {
-      intro.classList.add('hidden');
-      localStorage.setItem('seenIntro', 'true');
-    }
-  }, 4000);
 </script>
 </body>
 </html>
+
 
 
 
