@@ -359,74 +359,7 @@
                                  , "12:28", "13:13", "14:18", "15:18", "16:03", "16:42", "17:26", "18:08"
                                    , "18:56", "19:38", "20:26", "21:26"],
 };
-    <script>
-document.addEventListener("DOMContentLoaded", function () {
-  // 🔹 Po kliknięciu w minutę odjazdu
-  document.querySelectorAll(".minute").forEach((minuteEl) => {
-    minuteEl.addEventListener("click", function () {
-      const stopName = this.closest(".stop").querySelector("h3").textContent.trim();
-      const hour = parseInt(this.dataset.hour);
-      const minute = parseInt(this.textContent);
-      const routeName = this.dataset.route;
-
-      showRoute(stopName, routeName, hour, minute);
-    });
-  });
-});
-
-// 🔹 Główna funkcja wyświetlająca trasę z godzinami
-function showRoute(stopName, routeName, hour, minute) {
-  const routeStops = routeData[routeName];
-  if (!routeStops) {
-    alert("Nie znaleziono trasy: " + routeName);
-    return;
-  }
-
-  const routeContainer = document.getElementById("route-container");
-  routeContainer.innerHTML = `
-    <h2>${routeName}</h2>
-    <p>Trasa kursu z godziny ${hour}:${minute.toString().padStart(2, "0")} z przystanku ${stopName}</p>
-  `;
-
-  // 🔹 Tworzymy listę przystanków z godzinami
-  const list = document.createElement("ul");
-  list.classList.add("route-list");
-
-  routeStops.forEach((stop) => {
-    const stopItem = document.createElement("li");
-    stopItem.classList.add("route-stop");
-
-    const stopTime = findStopTime(stop, routeName, hour, minute);
-    stopItem.innerHTML = `<strong>${stop}</strong> — ${stopTime}`;
-    list.appendChild(stopItem);
-  });
-
-  routeContainer.appendChild(list);
-}
-
-// 🔹 Funkcja szukająca godziny danego przystanku dla wybranego kursu
-function findStopTime(stop, routeName, startHour, startMinute) {
-  const stopData = scheduleData[stop];
-  if (!stopData) return "–";
-
-  // Szukamy konkretnego kursu z tej samej trasy
-  const course = stopData.find((entry) => {
-    return (
-      entry.route === routeName &&
-      parseInt(entry.hour) === parseInt(startHour)
-    );
-  });
-
-  if (!course) return "–";
-
-  // znajdź najbliższą minutę w tym kursie
-  const possibleMinutes = course.minutes.filter((m) => m >= startMinute);
-  const min = possibleMinutes.length > 0 ? possibleMinutes[0] : course.minutes[course.minutes.length - 1];
-  return `${course.hour}:${min.toString().padStart(2, "0")}`;
-}
-</script>
-
-
+   
     const lineSelect = document.getElementById("lineSelect");
     const stopSelect = document.getElementById("stopSelect");
     const scheduleDiv = document.getElementById("schedule");
@@ -537,6 +470,7 @@ if ('serviceWorker' in navigator) {
 
 </body>
 </html>
+
 
 
 
