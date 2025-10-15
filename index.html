@@ -401,7 +401,7 @@
   let html = "<strong>Odjazdy (kliknij w minutę):</strong><br>";
   grouped.forEach(g => {
     html += `<div><b>${g.hour}</b> `;
-    html += <div><b>
+    html += <div>
       .map(m => `<u class="time" onclick='showRoute("${g.hour}:${m}")'>${m}</u>`)
       .join(" ");
     html += "</div>";
@@ -470,6 +470,7 @@ if ('serviceWorker' in navigator) {
 
 </body>
 </html>
+
 
 
 
