@@ -411,33 +411,33 @@
   routeDiv.innerHTML = "";
 }
  
- function showRoute(time) {
+function showRoute(time) {
   const line = lineSelect.value;
   const stops = lineStops[line] || [];
   routeDiv.innerHTML = "";
 
-  const firstStop = stops[0];
-  const times = scheduleData[firstStop] || [];
+  // znajdź przystanek aktualnie wybrany
+  const currentStop = stopSelect.value;
+  const currentTimes = scheduleData[currentStop] || [];
 
-  let idx = times.indexOf(time);
+  // znajdź dokładny indeks klikniętej minuty w tym przystanku
+  const idx = currentTimes.indexOf(time);
   if (idx === -1) {
-    const tNum = parseInt(time.replace(":", ""), 10);
-    let minDiff = Infinity;
-    for (let i = 0; i < times.length; i++) {
-      const val = parseInt(times[i].replace(":", ""), 10);
-      const diff = Math.abs(val - tNum);
-      if (diff < minDiff) { minDiff = diff; idx = i; }
-    }
+    routeDiv.innerHTML = "<p>Brak trasy dla tego kursu.</p>";
+    return;
   }
 
-  const routeLines = stops.map(stop => {
-    const arr = scheduleData[stop];
-    const t = arr && arr[idx] ? arr[idx] : "--:--";
-    return `${t} ${stop}`;
-  }).join("<br>");
+  // pokaż tylko przystanki, które mają czas dla tego kursu
+  const routeLines = stops
+    .map(stop => {
+      const arr = scheduleData[stop];
+      if (!arr || !arr[idx]) return null; // pomiń przystanki bez tego kursu
+      return `${arr[idx]} ${stop}`;
+    })
+    .filter(Boolean) // usuń null
+    .join("<br>");
 
-  routeDiv.innerHTML =
-    "<strong>Trasa przejazdu:</strong><br>" + routeLines;
+  routeDiv.innerHTML = "<strong>Trasa przejazdu:</strong><br>" + routeLines;
 }
 
 
@@ -470,6 +470,7 @@ if ('serviceWorker' in navigator) {
 
 </body>
 </html>
+
 
 
 
