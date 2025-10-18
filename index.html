@@ -54,11 +54,20 @@
   margin: 0 auto;            
 }
 
-  
-
-  #enter-btn:hover {
+   #enter-btn:hover {
     opacity: 0.8;
+     
   }
+    #clock {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  font-family: monospace;
+  color: #000;
+}
+
 </style>
 
 
@@ -92,6 +101,8 @@
   <button id="enter-btn">Przejdź do rozkładu</button>
 </div>
   <div class="container">
+    
+    <div id="clock" style="display:none;"></div>
     <h1>Rozkład jazdy Autobusów w Sulejówku</h1>
 
     <label for="lineSelect">Wybierz linię:</label>
@@ -453,6 +464,38 @@ if ('serviceWorker' in navigator) {
    <script>
   const intro = document.getElementById('intro-screen');
   const enterBtn = document.getElementById('enter-btn');
+  const clock = document.getElementById('clock');
+
+  // Sprawdź, czy ekran powitalny był już pokazany w tej sesji
+  const introShown = sessionStorage.getItem('introShown');
+
+  if (introShown === 'true') {
+    intro.classList.add('hidden');
+    startClock();
+  }
+
+  // Po kliknięciu — ukryj ekran i zapamiętaj tylko dla tej sesji
+  enterBtn.addEventListener('click', () => {
+    intro.classList.add('hidden');
+    sessionStorage.setItem('introShown', 'true');
+    startClock();
+  });
+
+  function startClock() {
+    clock.style.display = 'block'; // pokaż zegar
+    function updateClock() {
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const s = String(now.getSeconds()).padStart(2, '0');
+      clock.textContent = `${h}:${m}:${s}`;
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+  }
+</script>
+
+  
 
   // Sprawdź, czy ekran powitalny był już pokazany w tej sesji
   const introShown = sessionStorage.getItem('introShown');
@@ -471,6 +514,7 @@ if ('serviceWorker' in navigator) {
 
 </body>
 </html>
+
 
 
 
