@@ -411,37 +411,33 @@
   routeDiv.innerHTML = "";
 }
  
-  function showRoute(time) {
+ function showRoute(time) {
   const line = lineSelect.value;
   const stops = lineStops[line] || [];
   routeDiv.innerHTML = "";
 
-  // pobierz godzinę i minutę
-  const [hour, minute] = time.split(":").map(Number);
-  let routeHtml = "<strong>Trasa przejazdu:</strong><br>";
+  const firstStop = stops[0];
+  const times = scheduleData[firstStop] || [];
 
-  stops.forEach((stop) => {
-    const times = scheduleData[stop];
-    if (!times) {
-      routeHtml += `--:-- ${stop}<br>`;
-      return;
+  let idx = times.indexOf(time);
+  if (idx === -1) {
+    const tNum = parseInt(time.replace(":", ""), 10);
+    let minDiff = Infinity;
+    for (let i = 0; i < times.length; i++) {
+      const val = parseInt(times[i].replace(":", ""), 10);
+      const diff = Math.abs(val - tNum);
+      if (diff < minDiff) { minDiff = diff; idx = i; }
     }
+  }
 
-    // Znajdź najbliższą godzinę równą lub większą w danym przystanku
-    const match = times.find((t) => {
-      const [h, m] = t.split(":").map(Number);
-      return h === hour && m >= minute;
-    });
+  const routeLines = stops.map(stop => {
+    const arr = scheduleData[stop];
+    const t = arr && arr[idx] ? arr[idx] : "--:--";
+    return `${t} ${stop}`;
+  }).join("<br>");
 
-    // Jeśli nie ma — weź ostatni kurs o tej godzinie lub brak
-    const finalTime = match
-      ? match
-      : times.find((t) => parseInt(t.split(":")[0]) === hour) || "--:--";
-
-    routeHtml += `${finalTime} ${stop}<br>`;
-  });
-
-  routeDiv.innerHTML = routeHtml;
+  routeDiv.innerHTML =
+    "<strong>Trasa przejazdu:</strong><br>" + routeLines;
 }
 
 
@@ -474,6 +470,7 @@ if ('serviceWorker' in navigator) {
 
 </body>
 </html>
+
 
 
 
