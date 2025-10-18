@@ -54,7 +54,7 @@
   margin: 0 auto;            
 }
 
-  }
+  
 
   #enter-btn:hover {
     opacity: 0.8;
@@ -439,30 +439,70 @@ route-stop-number {
       });
     }
 
-function showRoute(line, direction, index) {
-  const schedule = timetable[line][direction];
-  const stops = Object.keys(schedule);
-  const times = stops.map(s => schedule[s][index]);
+function showRoute(time) {
+  const line = lineSelect.value;         
+  const stops = lineStops[line] || [];    
+  routeDiv.innerHTML = "";                
 
+  
+  const currentStop = stopSelect.value;
+  const currentTimes = scheduleData[currentStop] || [];
+
+  
+  const idx = currentTimes.indexOf(time);
+  if (idx === -1) {
+    routeDiv.innerHTML = "<p>Brak trasy dla tego kursu.</p>";
+    return;
+  }
+
+  
   let html = '<div class="route-timeline">';
   for (let i = 0; i < stops.length; i++) {
-    const stopName = stops[i];
-    const parts = stopName.split(" ");
-    const stopNumber = parts.pop();
-    const stopBaseName = parts.join(" ");
+    const stopKey = stops[i];
+    const timesArr = scheduleData[stopKey] || [];
+
+    
+    if (!timesArr[idx]) continue;
+
+    const timeStr = timesArr[idx];
+    // wydziel numer przystanku jeśli jest na końcu np. "Sulejówek Długa (01)" -> "(01)"
+    // lub "Sulejówek Długa 01" -> "01"
+    let stopBaseName = stopKey;
+    let stopNumber = "";
+
+    // spróbuj znaleźć numer w nawiasach
+    const m = stopKey.match(/(.*?)(\s*\(?\d{1,3}\)?\s*)$/);
+    if (m) {
+      stopBaseName = m[1].trim();
+      stopNumber = m[2].trim().replace(/[()]/g, "");
+    } else {
+      // jako fallback — jeśli ostatni token to dwie cyfry, traktuj jako numer
+      const parts = stopKey.split(" ");
+      const last = parts[parts.length - 1];
+      if (/^\d{1,3}$/.test(last)) {
+        stopNumber = last;
+        parts.pop();
+        stopBaseName = parts.join(" ");
+      }
+    }
 
     html += `
       <div class="route-stop">
-        <span class="route-time">${times[i]}</span>
-        <span class="route-dot"></span>
+        <span class="route-time">${timeStr}</span>
+        <span class="route-dot" aria-hidden="true"></span>
         <span class="route-name">${stopBaseName}</span>
-        <span class="route-stop-number">${stopNumber}</span>
+        ${stopNumber ? `<span class="route-stop-number">${stopNumber}</span>` : ''}
       </div>
     `;
   }
   html += '</div>';
+
   routeDiv.innerHTML = html;
+
+  // opcjonalnie: przewiń do sekcji trasy, żeby użytkownik od razu widział efekt
+  routeDiv.scrollIntoView({ behavior: "smooth", block: "start" });
 }
+
 
     
     function showSchedule() {
@@ -559,6 +599,7 @@ if ('serviceWorker' in navigator) {
 
 </body>
 </html>
+
 
 
 
