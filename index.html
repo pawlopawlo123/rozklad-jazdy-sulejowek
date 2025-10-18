@@ -82,43 +82,54 @@
     .time { cursor: pointer; color: inherit; } /* minuty bez koloru */
     .time u { text-decoration: underline; } /* tylko podkreślenie minut */
      
-     /* Styl pionowej listy trasy – jak w przykładzie */
- .route-timeline {
+    /* --- Styl pionowej linii między godziną a nazwą przystanku --- */
+.route-timeline {
   position: relative;
   margin: 20px 0;
-  padding-left: 55px;
-  border-left: 3px solid #ccc;
 }
 
 .route-stop {
+  display: flex;
+  align-items: center;
   position: relative;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 
-.route-stop::before {
+/* pionowa linia */
+.route-stop::after {
   content: "";
   position: absolute;
-  left: -10px;
-  top: 3px;
-  width: 14px;
-  height: 14px;
-  background-color: #fff;
-  border: 3px solid #007bff;
-  border-radius: 50%;
+  left: 60px;              /* pozycja linii między czasem a nazwą */
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: #ccc;
+  z-index: 0;
 }
 
-.route-stop:first-child::before,
-.route-stop:last-child::before {
+/* kółko na linii */
+.route-dot {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  border: 3px solid #007bff;
+  border-radius: 50%;
+  background-color: white;
+  margin: 0 10px;
+  z-index: 1;
+}
+
+.route-stop:first-child .route-dot,
+.route-stop:last-child .route-dot {
   background-color: #007bff;
 }
 
 .route-time {
   font-weight: 600;
   color: #333;
-  width: 45px;
-  display: inline-block;
+  width: 50px;
   text-align: right;
-  margin-right: 10px;
+  flex-shrink: 0;
 }
 
 .route-name {
@@ -131,6 +142,7 @@
   font-size: 0.85rem;
   margin-left: 6px;
 }
+
 
   </style>
 </head>
@@ -434,15 +446,15 @@ function showRoute(line, direction, index) {
 
   let html = '<div class="route-timeline">';
   for (let i = 0; i < stops.length; i++) {
-    // Wyciągamy numer przystanku (np. "Sulejówek Długa 01" → "01")
     const stopName = stops[i];
     const parts = stopName.split(" ");
-    const stopNumber = parts.pop(); // ostatni element
+    const stopNumber = parts.pop();
     const stopBaseName = parts.join(" ");
 
     html += `
       <div class="route-stop">
         <span class="route-time">${times[i]}</span>
+        <span class="route-dot"></span>
         <span class="route-name">${stopBaseName}</span>
         <span class="route-stop-number">${stopNumber}</span>
       </div>
@@ -547,6 +559,7 @@ if ('serviceWorker' in navigator) {
 
 </body>
 </html>
+
 
 
 
