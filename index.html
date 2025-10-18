@@ -56,17 +56,27 @@
 
    #enter-btn:hover {
     opacity: 0.8;
-     
-  }
-    #clock {
+   }   
+  
+    #clock, #date {
   position: absolute;
-  top: 10px;
-  right: 20px;
-  font-size: 1.3rem;
   font-weight: bold;
   font-family: monospace;
+  font-size: 1.2rem;
   color: #000;
 }
+
+#clock {
+  top: 10px;
+  right: 20px;
+}
+
+#date {
+  top: 10px;
+  left: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
 
 </style>
 
@@ -102,6 +112,7 @@
 </div>
   <div class="container">
     
+    <div id="date" style="display:none;"></div>
     <div id="clock" style="display:none;"></div>
     <h1>Rozkład jazdy Autobusów w Sulejówku</h1>
 
@@ -465,33 +476,45 @@ if ('serviceWorker' in navigator) {
   const intro = document.getElementById('intro-screen');
   const enterBtn = document.getElementById('enter-btn');
   const clock = document.getElementById('clock');
+  const dateDisplay = document.getElementById('date');
 
   // Sprawdź, czy ekran powitalny był już pokazany w tej sesji
   const introShown = sessionStorage.getItem('introShown');
 
   if (introShown === 'true') {
     intro.classList.add('hidden');
-    startClock();
+    startDateTime();
   }
 
-  // Po kliknięciu — ukryj ekran i zapamiętaj tylko dla tej sesji
   enterBtn.addEventListener('click', () => {
     intro.classList.add('hidden');
     sessionStorage.setItem('introShown', 'true');
-    startClock();
+    startDateTime();
   });
 
-  function startClock() {
-    clock.style.display = 'block'; // pokaż zegar
-    function updateClock() {
-      const now = new Date();
-      const h = String(now.getHours()).padStart(2, '0');
-      const m = String(now.getMinutes()).padStart(2, '0');
-      const s = String(now.getSeconds()).padStart(2, '0');
-      clock.textContent = `${h}:${m}:${s}`;
-    }
-    updateClock();
-    setInterval(updateClock, 1000);
+  function startDateTime() {
+    clock.style.display = 'block';
+    dateDisplay.style.display = 'block';
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+  }
+
+  function updateDateTime() {
+    const now = new Date();
+
+    // Godzina z sekundami
+    const h = String(now.getHours()).padStart(2, '0');
+    const m = String(now.getMinutes()).padStart(2, '0');
+    const s = String(now.getSeconds()).padStart(2, '0');
+    clock.textContent = `${h}:${m}:${s}`;
+
+    // Data po polsku
+    const dni = ["1 stycznia","2 lutego","3 marca","4 kwietnia","5 maja","6 czerwca","7 lipca","8 sierpnia","9 września","10 października","11 listopada","12 grudnia"];
+    const miesiace = ["stycznia","lutego","marca","kwietnia","maja","czerwca","lipca","sierpnia","września","października","listopada","grudnia"];
+    const dzien = now.getDate();
+    const miesiac = miesiace[now.getMonth()];
+    const rok = now.getFullYear();
+    dateDisplay.textContent = `${dzien} ${miesiac} ${rok}r.`;
   }
 </script>    
 </script>
