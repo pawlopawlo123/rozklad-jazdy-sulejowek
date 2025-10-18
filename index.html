@@ -82,36 +82,37 @@
     .time { cursor: pointer; color: inherit; } /* minuty bez koloru */
     .time u { text-decoration: underline; } /* tylko podkreślenie minut */
      
-    /* --- Styl pionowej linii między godziną a nazwą przystanku --- */
-route-timeline {
+    
+/* --- Styl trasy: pionowa linia POMIĘDZY godziną a nazwą, z kółkami --- */
+.route-timeline {
+  margin: 30px 0;
   position: relative;
-  margin: 20px 0;
 }
 
-route-stop {
+.route-stop {
   display: flex;
   align-items: center;
   position: relative;
-  margin-bottom: 10px;
+  margin-bottom: 14px;
 }
 
-/* pionowa linia */
-route-stop::after {
+/* pionowa linia biegnąca między czasem a nazwą */
+.route-timeline::before {
   content: "";
   position: absolute;
-  left: 60px;              /* pozycja linii między czasem a nazwą */
+  left: 68px; /* ustaw tu, jeśli trzeba przesunąć linię w prawo/lewo */
   top: 0;
   bottom: 0;
   width: 2px;
-  background-color: #ccc;
+  background-color: #007bff; /* kolor linii */
   z-index: 0;
 }
 
-/* kółko na linii */
-route-dot {
+/* kółko osadzone na linii */
+.route-dot {
   position: relative;
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   border: 3px solid #007bff;
   border-radius: 50%;
   background-color: white;
@@ -119,12 +120,13 @@ route-dot {
   z-index: 1;
 }
 
-route-stop:first-child .route-dot,
-route-stop:last-child .route-dot {
+/* wypełnione kółko dla pierwszego i ostatniego przystanku */
+.route-stop:first-child .route-dot,
+.route-stop:last-child .route-dot {
   background-color: #007bff;
 }
 
-route-time {
+.route-time {
   font-weight: 600;
   color: #333;
   width: 50px;
@@ -132,17 +134,16 @@ route-time {
   flex-shrink: 0;
 }
 
-route-name {
+.route-name {
   color: #222;
   font-size: 0.95rem;
 }
 
-route-stop-number {
+.route-stop-number {
   color: #666;
   font-size: 0.85rem;
-  margin-left: 6px;
+  margin-left: 8px;
 }
-
 
   </style>
 </head>
@@ -599,6 +600,7 @@ if ('serviceWorker' in navigator) {
 
 </body>
 </html>
+
 
 
 
