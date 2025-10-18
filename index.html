@@ -81,6 +81,57 @@
     .timetable { background: white; padding: 15px; border-radius: 8px; }
     .time { cursor: pointer; color: inherit; } /* minuty bez koloru */
     .time u { text-decoration: underline; } /* tylko podkreślenie minut */
+     
+     /* Styl pionowej listy trasy – jak w przykładzie */
+ .route-timeline {
+  position: relative;
+  margin: 20px 0;
+  padding-left: 55px;
+  border-left: 3px solid #ccc;
+}
+
+.route-stop {
+  position: relative;
+  margin-bottom: 14px;
+}
+
+.route-stop::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 3px;
+  width: 14px;
+  height: 14px;
+  background-color: #fff;
+  border: 3px solid #007bff;
+  border-radius: 50%;
+}
+
+.route-stop:first-child::before,
+.route-stop:last-child::before {
+  background-color: #007bff;
+}
+
+.route-time {
+  font-weight: 600;
+  color: #333;
+  width: 45px;
+  display: inline-block;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.route-name {
+  color: #222;
+  font-size: 0.95rem;
+}
+
+.route-stop-number {
+  color: #666;
+  font-size: 0.85rem;
+  margin-left: 6px;
+}
+
   </style>
 </head>
 <body>
@@ -376,6 +427,32 @@
       });
     }
 
+function showRoute(line, direction, index) {
+  const schedule = timetable[line][direction];
+  const stops = Object.keys(schedule);
+  const times = stops.map(s => schedule[s][index]);
+
+  let html = '<div class="route-timeline">';
+  for (let i = 0; i < stops.length; i++) {
+    // Wyciągamy numer przystanku (np. "Sulejówek Długa 01" → "01")
+    const stopName = stops[i];
+    const parts = stopName.split(" ");
+    const stopNumber = parts.pop(); // ostatni element
+    const stopBaseName = parts.join(" ");
+
+    html += `
+      <div class="route-stop">
+        <span class="route-time">${times[i]}</span>
+        <span class="route-name">${stopBaseName}</span>
+        <span class="route-stop-number">${stopNumber}</span>
+      </div>
+    `;
+  }
+  html += '</div>';
+  routeDiv.innerHTML = html;
+}
+
+    
     function showSchedule() {
   const stop = stopSelect.value;
   const times = scheduleData[stop] || [];
@@ -470,6 +547,7 @@ if ('serviceWorker' in navigator) {
 
 </body>
 </html>
+
 
 
 
