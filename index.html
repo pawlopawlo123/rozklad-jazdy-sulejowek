@@ -500,23 +500,18 @@ if ('serviceWorker' in navigator) {
   }
 
   function updateDateTime() {
-    const now = new Date();
+  const now = new Date();
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const date = now.toLocaleDateString('pl-PL', options);
+  const time = now.toLocaleTimeString('pl-PL');
+  document.getElementById("datetime").innerHTML = `${date}, ${time}`;
+}
 
-    // Godzina z sekundami
-    const h = String(now.getHours()).padStart(2, '0');
-    const m = String(now.getMinutes()).padStart(2, '0');
-    const s = String(now.getSeconds()).padStart(2, '0');
-    clock.textContent = `${h}:${m}:${s}`;
+setInterval(updateDateTime, 1000);
+updateDateTime();
 
-    // Data po polsku
-    const dni = ["1 stycznia","2 lutego","3 marca","4 kwietnia","5 maja","6 czerwca","7 lipca","8 sierpnia","9 września","10 października","11 listopada","12 grudnia"];
-    const miesiace = ["stycznia","lutego","marca","kwietnia","maja","czerwca","lipca","sierpnia","września","października","listopada","grudnia"];
-    const dzien = now.getDate();
-    const miesiac = miesiace[now.getMonth()];
-    const rok = now.getFullYear();
-    dateDisplay.textContent = `${dzien} ${miesiac} ${rok}r.`;
-  }
 </script>    
 </script>
 </body>
 </https/>
+
