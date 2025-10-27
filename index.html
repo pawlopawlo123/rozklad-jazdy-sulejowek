@@ -114,6 +114,7 @@
     
     <div id="date" style="display:none;"></div>
     <div id="clock" style="display:none;"></div>
+    <p id="datetime" style="text-align:center; font-size:18px; margin: 5px 0; font-weight:bold;"></p>
     <h1>Rozkład jazdy Autobusów w Sulejówku</h1>
 
     <label for="lineSelect">Wybierz linię:</label>
@@ -507,11 +508,16 @@ if ('serviceWorker' in navigator) {
   document.getElementById("datetime").innerHTML = `${date}, ${time}`;
 }
 
-setInterval(updateDateTime, 1000);
-updateDateTime();
+// Upewniamy się, że kod działa dopiero po załadowaniu strony
+window.addEventListener("DOMContentLoaded", () => {
+  updateDateTime();
+  setInterval(updateDateTime, 1000);
+});
+
 
 </script>    
 </script>
 </body>
 </https/>
+
 
