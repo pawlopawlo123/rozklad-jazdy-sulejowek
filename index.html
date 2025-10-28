@@ -101,6 +101,51 @@
     .time { cursor: pointer; color: inherit; } /* minuty bez koloru */
     .time u { text-decoration: underline; } /* tylko podkreślenie minut */
      
+     /* --- Nowoczesny wygląd trasy --- */
+.modern-route {
+  display: flex;
+  position: relative;
+  margin-top: 10px;
+  padding: 10px 0;
+}
+
+.route-line {
+  position: absolute;
+  left: 10px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: #169179;
+  border-radius: 2px;
+}
+
+.route-stops {
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.route-stop {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.route-stop .dot {
+  width: 10px;
+  height: 10px;
+  background-color: #169179;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.stop-name {
+  font-size: 15px;
+  color: #333;
+}
+
+     
   </style>
 </head>
 <body>
@@ -435,21 +480,31 @@
   routeDiv.innerHTML = "";
 }
  
-function showRoute(time) {
+function showRoute() {
   const line = lineSelect.value;
   const stops = lineStops[line] || [];
-  routeDiv.innerHTML = "";
+  const routeDiv = document.getElementById("route");
 
-  // znajdź przystanek aktualnie wybrany
-  const currentStop = stopSelect.value;
-  const currentTimes = scheduleData[currentStop] || [];
-
-  // znajdź dokładny indeks klikniętej minuty w tym przystanku
-  const idx = currentTimes.indexOf(time);
-  if (idx === -1) {
-    routeDiv.innerHTML = "<p>Brak trasy dla tego kursu.</p>";
+  if (stops.length === 0) {
+    routeDiv.innerHTML = "<p>Brak danych o trasie.</p>";
     return;
   }
+
+  // HTML trasy z linią i kropkami
+  let html = '<div class="modern-route">';
+  html += '<div class="route-line"></div>'; 
+  html += '<div class="route-stops">';
+  html += stops.map(s => `
+    <div class="route-stop">
+      <div class="dot"></div>
+      <div class="stop-name">${s}</div>
+    </div>
+  `).join("");
+  html += '</div></div>';
+
+  routeDiv.innerHTML = html;
+}
+
 
   // pokaż tylko przystanki, które mają czas dla tego kursu
   const routeLines = stops
@@ -524,6 +579,7 @@ window.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </https/>
+
 
 
 
