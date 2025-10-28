@@ -100,55 +100,6 @@
     .timetable { background: white; padding: 15px; border-radius: 8px; }
     .time { cursor: pointer; color: inherit; } /* minuty bez koloru */
     .time u { text-decoration: underline; } /* tylko podkreślenie minut */
-     
-/* --- Linia i kropki pomiędzy godzinami a nazwami przystanków --- */
-#route {
-  font-family: Arial, sans-serif;
-  color: #333; /* kolor tekstu i linii */
-}
-
-#route strong {
-  display: block;
-  margin-bottom: 8px;
-}
-
-#route p,
-#route div,
-#route span {
-  display: flex;
-  align-items: center;
-  gap: 10px; /* odstęp między elementami */
-  position: relative;
-}
-
-#route p::before,
-#route div::before,
-#route span::before {
-  content: "";
-  flex-shrink: 0;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: currentColor; /* kropki w kolorze tekstu */
-}
-
-#route p::after,
-#route div::after,
-#route span::after {
-  content: "";
-  flex-shrink: 0;
-  width: 2px;
-  height: 25px; /* długość linii między kropkami */
-  background-color: currentColor; /* linia w kolorze tekstu */
-  margin: 0 8px;
-}
-
-#route p:last-child::after,
-#route div:last-child::after,
-#route span:last-child::after {
-  display: none; /* brak linii po ostatnim przystanku */
-}
-
 
      
   </style>
@@ -576,6 +527,7 @@ window.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </https/>
+
 
 
 
