@@ -450,21 +450,14 @@
     }
 
     function showSchedule() {
-  const line = lineSelect.value;
   const stop = stopSelect.value;
-  const times = (scheduleData[line] && scheduleData[line][stop]) || [];
-
-
+  const times = scheduleData[stop] || [];
   scheduleDiv.innerHTML = times.length
-    ? "<strong>Odjazdy (kliknij w godzinę, aby zobaczyć trasę):</strong><br>" +
-      times.map(t => `<span class='time' onclick='showRoute()' style='cursor:pointer;color:#0077cc;'>${t}</span>`).join("<br>")
+    ? "<strong>Odjazdy:</strong><br>" + times.join("<br>")
     : "<p>Brak danych o rozkładzie.</p>";
-
-  // czyścimy trasę po zmianie przystanku
-  document.getElementById("route").innerHTML = "";
 }
 
-
+    
   // Grupowanie, ALE z zachowaniem oryginalnej kolejności z scheduleData
   const grouped = [];
   times.forEach(t => {
@@ -582,6 +575,7 @@ window.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </https/>
+
 
 
 
