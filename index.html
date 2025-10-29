@@ -450,9 +450,10 @@
     }
 
     function showSchedule() {
-  const line = lineSelect.value;
   const stop = stopSelect.value;
-  const times = scheduleData[stop] || [];
+  const line = lineSelect.value;
+  const times = (scheduleData[line] && scheduleData[line][stop]) || [];
+
   scheduleDiv.innerHTML = times.length
     ? "<strong>Odjazdy:</strong><br>" + times.join("<br>")
     : "<p>Brak danych o rozkładzie.</p>";
@@ -576,6 +577,7 @@ window.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </https/>
+
 
 
 
