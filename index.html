@@ -450,15 +450,17 @@
 
     function showSchedule() {
   const stop = stopSelect.value;
-  const line = lineSelect.value;
   const times = (scheduleData[line] && scheduleData[line][stop]) || [];
-
   scheduleDiv.innerHTML = times.length
     ? "<strong>Odjazdy:</strong><br>" + times.join("<br>")
+    times.map(t => {
+    const [h, m] = t.split(":");
+    return `<span class='time'>${h}:<u onclick='showRoute("${t}")'>${m}</u></span>`;
+    }).join("<br>")
     : "<p>Brak danych o rozkładzie.</p>";
-}
-
-    
+      routeDiv.innerHTML = "";
+    }
+      
   // Grupowanie, ALE z zachowaniem oryginalnej kolejności z scheduleData
   const grouped = [];
   times.forEach(t => {
@@ -576,6 +578,7 @@ window.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </https/>
+
 
 
 
