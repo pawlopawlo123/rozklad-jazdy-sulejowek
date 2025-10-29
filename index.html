@@ -449,18 +449,34 @@
     }
 
     function showSchedule() {
-  const stop = stopSelect.value;
-  const times = (scheduleData[line] && scheduleData[line][stop]) || [];
-  scheduleDiv.innerHTML = times.length
-    ? "<strong>Odjazdy:</strong><br>" + times.join("<br>")
-    times.map(t => {
-    const [h, m] = t.split(":");
-    return `<span class='time'>${h}:<u onclick='showRoute("${t}")'>${m}</u></span>`;
-    }).join("<br>")
-    : "<p>Brak danych o rozkładzie.</p>";
-      routeDiv.innerHTML = "";
-    }
-      
+  const line = lineSelect.value;   // aktualnie wybrana linia
+  const stop = stopSelect.value;   // aktualnie wybrany przystanek
+
+  // próbujemy pobrać godziny dla konkretnej linii i przystanku
+  const times =
+    (scheduleData[line] && scheduleData[line][stop]) ||
+    scheduleData[stop] || // wsparcie dla starej struktury
+    [];
+
+  // generujemy HTML rozkładu
+  if (times.length > 0) {
+    scheduleDiv.innerHTML =
+      "<strong>Odjazdy (kliknij godzinę, aby zobaczyć trasę):</strong><br>" +
+      times
+        .map(
+          (t) =>
+            `<span class="time" onclick="showRoute()" style="cursor:pointer;color:#0077cc;">${t}</span>`
+        )
+        .join("<br>");
+  } else {
+    scheduleDiv.innerHTML = "<p>Brak danych o rozkładzie.</p>";
+  }
+
+  // czyścimy trasę po zmianie przystanku
+  document.getElementById("route").innerHTML = "";
+}
+
+    
   // Grupowanie, ALE z zachowaniem oryginalnej kolejności z scheduleData
   const grouped = [];
   times.forEach(t => {
@@ -578,6 +594,7 @@ window.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </https/>
+
 
 
 
