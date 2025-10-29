@@ -448,24 +448,15 @@
       });
     }
 
-     function showSchedule() {
-      const stop = StopSelect.value;
-      const times = scheduleData[stop] || [];
-      scheduleDiv.innerHTML = "";
-
-      if (!times.length) {
-        scheduleDiv.innerHTML = "<p>Brak danych o rozkładzie.</p>";
-        routeDiv.innerHTML = "";
-        return;
+     function showSchedule() { 
+       const stop = stopSelect.value; 
+       const times = scheduleData[stop] || []; 
+       if (!times.length) { 
+      scheduleDiv.innerHTML = "<p>Brak danych o rozkładzie.</p>"; 
+      routeDiv.innerHTML = ""; 
+      return; 
       }
 
-      const title = document.createElement("strong");
-      title.textContent = "Odjazdy (kliknij w minutę):";
-      scheduleDiv.appendChild(title);
-      scheduleDiv.appendChild(document.createElement("br"));
-     }
-
-    
   // Grupowanie, ALE z zachowaniem oryginalnej kolejności z scheduleData
   const grouped = [];
   times.forEach(t => {
@@ -583,6 +574,7 @@ window.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </https/>
+
 
 
 
