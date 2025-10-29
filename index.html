@@ -449,23 +449,17 @@
     }
 
     function showSchedule() {
-  const line = lineSelect.value;   // aktualnie wybrana linia
-  const stop = stopSelect.value;   // aktualnie wybrany przystanek
-
-  // próbujemy pobrać godziny dla konkretnej linii i przystanku
-  const times =
-    (scheduleData[line] && scheduleData[line][stop]) ||
-    scheduleData[stop] || // wsparcie dla starej struktury
+  const line = lineSelect.value;   
+  const stop = stopSelect.value;   
+  const times = (scheduleData[line] && scheduleData[line][stop]) ||
+    scheduleData[stop]
     [];
-
-  // generujemy HTML rozkładu
   if (times.length > 0) {
     scheduleDiv.innerHTML =
-      "<strong>Odjazdy (kliknij godzinę, aby zobaczyć trasę):</strong><br>" +
+      "<strong>Odjazdy (kliknij w minutę, aby zobaczyć trasę):</strong><br>" +
       times
         .map(
-          (t) =>
-            `<span class="time" onclick="showRoute()" style="cursor:pointer;color:#0077cc;">${t}</span>`
+          (t) =><span class="time" onclick="showRoute()" style="cursor:pointer;color:#0077cc;">${t}</span>`
         )
         .join("<br>");
   } else {
@@ -594,6 +588,7 @@ window.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </https/>
+
 
 
 
