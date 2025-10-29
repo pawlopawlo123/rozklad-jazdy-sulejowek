@@ -448,18 +448,22 @@
       });
     }
 
-    function showSchedule() {
-      const stop = lineStops.value;
+     function showSchedule() {
+      const stop = StopSelect.value;
       const times = scheduleData[stop] || [];
-      scheduleDiv.innerHTML = times.length
-        ? "<strong>Odjazdy (kliknij w minutę):</strong><br>" +
-          times.map(t => {
-            const [h, m] = t.split(":");
-            return `<span class='time'>${h}:<u onclick='showRoute("${t}")'>${m}</u></span>`;
-          }).join("<br>")
-        : "<p>Brak danych o rozkładzie.</p>";
-      routeDiv.innerHTML = "";
-    }
+      scheduleDiv.innerHTML = "";
+
+      if (!times.length) {
+        scheduleDiv.innerHTML = "<p>Brak danych o rozkładzie.</p>";
+        routeDiv.innerHTML = "";
+        return;
+      }
+
+      const title = document.createElement("strong");
+      title.textContent = "Odjazdy (kliknij w minutę):";
+      scheduleDiv.appendChild(title);
+      scheduleDiv.appendChild(document.createElement("br"));
+     }
 
     
   // Grupowanie, ALE z zachowaniem oryginalnej kolejności z scheduleData
@@ -579,6 +583,7 @@ window.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </https/>
+
 
 
 
