@@ -452,9 +452,8 @@
     function showSchedule() {
   const line = lineSelect.value;
   const stop = stopSelect.value;
-
-  // pobierz rozkład dla wybranej linii i przystanku
   const times = (scheduleData[line] && scheduleData[line][stop]) || [];
+
 
   scheduleDiv.innerHTML = times.length
     ? "<strong>Odjazdy (kliknij w godzinę, aby zobaczyć trasę):</strong><br>" +
@@ -583,6 +582,7 @@ window.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </https/>
+
 
 
 
