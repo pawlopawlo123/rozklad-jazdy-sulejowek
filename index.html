@@ -455,20 +455,14 @@
       });
     }
 
-     function showSchedule() {
-  const line = lineSelect.value;   // wybrana linia
-  const stop = stopSelect.value;   // wybrany przystanek
-
-  // pobieramy czasy z danej linii i przystanku
-  const times = (scheduleData[line] && scheduleData[line][stop]) || [];
-
-  scheduleDiv.innerHTML = times.length
-    ? "<strong>Odjazdy (kliknij godzinę, aby zobaczyć trasę):</strong><br>" +
-      times.map(t => `<span class='time' onclick='showRoute()'>${t}</span>`).join("<br>")
-    : "<p>Brak danych o rozkładzie.</p>";
-
-  document.getElementById("route").innerHTML = "";
-}
+     function showSchedule() { 
+       const stop = stopSelect.value; 
+       const times = scheduleData[stop] || []; 
+       if (!times.length) { 
+      scheduleDiv.innerHTML = "<p>Brak danych o rozkładzie.</p>"; 
+      routeDiv.innerHTML = ""; 
+      return; 
+      }
 
 
   // Grupowanie, ALE z zachowaniem oryginalnej kolejności z scheduleData
@@ -588,6 +582,7 @@ window.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </https/>
+
 
 
 
