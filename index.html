@@ -113,7 +113,6 @@
   <img src="icon-128.png" alt="Logo aplikacji" id="intro-logo">
   <h1>🚍Rozkład Sulejówek🚍</h1>
   <p>Witam w aplikacji rozkładu jazdy!</p>
-  <p>UWAGA! APLIKACJA CHWILOWO NIE DZIAŁA ZA UTRUDNIENIA PRZEPRASZAM</p>
   <button id="enter-btn">Przejdź do aplikacji</button>
 </button>
 </div>
@@ -489,7 +488,6 @@ if ('serviceWorker' in navigator) {
   const clock = document.getElementById('clock');
   const dateDisplay = document.getElementById('date');
 
-  // Sprawdź, czy ekran powitalny był już pokazany w tej sesji
   const introShown = sessionStorage.getItem('introShown');
 
   if (introShown === 'true') {
@@ -511,26 +509,22 @@ if ('serviceWorker' in navigator) {
   }
 
   function updateDateTime() {
-  const now = new Date();
+    const now = new Date();
+    const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const date = now.toLocaleDateString('pl-PL', optionsDate);
+    const time = now.toLocaleTimeString('pl-PL');
+    document.getElementById("datetime").textContent = `${date}, ${time}`;
+  }
 
-  // Ustawienia polskie z dniem tygodnia
-  const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  const date = now.toLocaleDateString('pl-PL', optionsDate);
-  const time = now.toLocaleTimeString('pl-PL');
+  window.addEventListener("DOMContentLoaded", () => {
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+  });
+</script>
 
-  // Wszystko w jednej linii
-  document.getElementById("datetime").textContent = `${date}, ${time}`;
-}
-
-// Uruchamiamy po załadowaniu strony
-window.addEventListener("DOMContentLoaded", () => {
-  updateDateTime();
-  setInterval(updateDateTime, 1000);
-});
-
-   
 </body>
 </html>
+
 
 
 
