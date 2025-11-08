@@ -114,6 +114,9 @@
   <h1>🚍Rozkład Sulejówek🚍</h1>
   <p>Witam w aplikacji rozkładu jazdy!</p>
   <button id="enter-btn">Przejdź do aplikacji</button>
+  <button id="admin-btn" style="margin-top:10px; background:#444; color:white; padding:10px 20px; border:none; border-radius:8px;">
+  Administrator
+</button>
 </div>
   <div class="container">
     
@@ -527,10 +530,164 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 
+ <!-- ✅ PANEL LOGOWANIA ADMINA -->
+<div id="admin-login" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7);
+backdrop-filter:blur(4px); align-items:center; justify-content:center; z-index:99990; text-align:center;">
+  <div style="background:white; padding:20px; border-radius:10px; width:300px;">
+    <h3>Logowanie Administratora</h3>
+    <input id="admin-user" type="text" placeholder="Login" style="width:100%; padding:8px; margin-top:10px;"><br>
+    <input id="admin-pass" type="password" placeholder="Hasło" style="width:100%; padding:8px; margin-top:10px;"><br><br>
+    <button onclick="adminLogin()" style="width:100%; padding:10px; background:#222; color:white;">Zaloguj</button><br><br>
+    <button onclick="closeAdminLogin()" style="width:100%; padding:10px; background:#aaa;">Zamknij</button>
+  </div>
+</div>
 
+<!-- ✅ PANEL ADMINA -->
+<div id="admin-panel" style="display:none; position:fixed; inset:0; background:white; overflow:auto; padding:20px; z-index:99995;">
+  <h2>Panel Administratora</h2>
+
+  <label for="admin-line">Wybierz linię do edycji:</label>
+  <select id="admin-line" style="width:100%; padding:10px; margin:10px 0;">
+    <option>Linia Północna</option>
+    <option>Linia Południowa kier. PKP Sulejówek Miłosna</option>
+    <option>Linia Południowa kier. Sulejówek Dzielna</option>
+  </select>
+
+  <button onclick="loadLine()" style="width:100%; background:#222; color:white; padding:10px;">Załaduj linię</button>
+
+  <div id="admin-editor" style="margin-top:20px;"></div>
+
+  <button onclick="closeAdminPanel()" style="margin-top:20px; width:100%; padding:10px; background:#aaa;">Zamknij panel</button>
+</div>
    
+<script>
+<script>
+const ADMIN_LOGIN = "Miasto Sulejówek";
+const ADMIN_PASS = "11021974";
+
+document.getElementById("admin-btn").onclick = () => {
+  document.getElementById("admin-login").style.display = "flex";
+};
+
+function closeAdminLogin() {
+  document.getElementById("admin-login").style.display = "none";
+}
+
+function adminLogin() {
+  const u = document.getElementById("admin-user").value;
+  const p = document.getElementById("admin-pass").value;
+
+  if (u === ADMIN_LOGIN && p === ADMIN_PASS) {
+    document.getElementById("admin-login").style.display = "none";
+    document.getElementById("admin-panel").style.display = "block";
+  } else {
+    alert("Błędny login lub hasło!");
+  }
+}
+
+function closeAdminPanel() {
+  document.getElementById("admin-panel").style.display = "none";
+}
+
+function loadLine() {
+  const line = document.getElementById("admin-line").value;
+
+  let saved = JSON.parse(localStorage.getItem("customLines") || "{}");
+
+  let stops = saved[line] || lineStops[line];
+
+  if (!stops) {
+    document.getElementById("admin-editor").innerHTML = "<p>Błąd: brak danych tej linii!</p>";
+    return;
+  }
+
+  let html = `<h3>${line}</h3>`;
+
+  stops.forEach(stop => {
+    let times = scheduleData[stop] || [];
+
+    html += `
+      <div style="border:1px solid #ccc; padding:10px; margin:10px 0; background:#fafafa;">
+        <strong>${stop}</strong>
+        <button onclick="deleteStop('${line}','${stop}')" style="float:right; background:#c00; color:white; border:none; padding:4px 8px;">Usuń</button>
+        <hr>
+        
+        <div style="margin-left:10px;">
+          ${times.map(t => `
+            <div>
+              ${t}
+              <button onclick="deleteTime('${stop}','${t}')" style="background:#c00; color:white; border:none; padding:2px 5px;">X</button>
+            </div>
+          `).join("")}
+        </div>
+
+        <br>
+        <input id="time-${stop}" placeholder="np. 07:15" style="padding:5px; width:120px;">
+        <button onclick="addTime('${stop}')" style="padding:5px;">Dodaj godzinę</button>
+      </div>
+    `;
+  });
+
+  // dodawanie nowego przystanku
+  html += `
+    <h3>Dodaj nowy przystanek:</h3>
+    <input id="newStop" placeholder="Nazwa przystanku" style="width:100%; padding:10px;">
+    <button onclick="addStop('${line}')" style="width:100%; margin-top:10px; padding:10px; background:#28a745; color:white;">
+      Dodaj przystanek
+    </button>
+  `;
+
+  document.getElementById("admin-editor").innerHTML = html;
+}
+
+function deleteStop(line, stop) {
+  let saved = JSON.parse(localStorage.getItem("customLines") || "{}");
+
+  saved[line] = (saved[line] || lineStops[line]).filter(s => s !== stop);
+
+  localStorage.setItem("customLines", JSON.stringify(saved));
+  alert("Usunięto przystanek!");
+  loadLine();
+}
+
+function addStop(line) {
+  let name = document.getElementById("newStop").value.trim();
+  if (!name) return alert("Podaj nazwę przystanku!");
+
+  let saved = JSON.parse(localStorage.getItem("customLines") || "{}");
+  let list = saved[line] || lineStops[line];
+
+  list.push(name);
+
+  saved[line] = list;
+  scheduleData[name] = []; // pusty rozkład
+
+  localStorage.setItem("customLines", JSON.stringify(saved));
+  alert("Dodano przystanek!");
+  loadLine();
+}
+
+function deleteTime(stop, time) {
+  scheduleData[stop] = scheduleData[stop].filter(t => t !== time);
+  alert("Usunięto godzinę!");
+  loadLine();
+}
+
+function addTime(stop) {
+  const newTime = document.getElementById("time-" + stop).value.trim();
+  if (!newTime.match(/^\d{2}:\d{2}$/)) return alert("Format HH:MM!");
+
+  if (!scheduleData[stop]) scheduleData[stop] = [];
+
+  scheduleData[stop].push(newTime);
+  alert("Dodano godzinę!");
+  loadLine();
+}
 </script>
+
+  </script>   
 </body>
+
 
 
 
