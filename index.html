@@ -114,8 +114,7 @@
   <h1>🚍Rozkład Sulejówek🚍</h1>
   <p>Witam w aplikacji rozkładu jazdy!</p>
   <button id="enter-btn">Przejdź do aplikacji</button>
-  <button id="admin-btn" style="margin-top:10px; background:#444; color:white; padding:10px 20px; border:none; border-radius:8px;">
-  Administrator
+  <button id="admin-btn">Administrator</button>
 </button>
 </div>
   <div class="container">
@@ -530,7 +529,14 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 
- <!-- ✅ PANEL LOGOWANIA ADMINA -->
+ 
+
+
+   
+<script>
+
+}
+     <!-- ✅ PANEL LOGOWANIA ADMINA -->
 <div id="admin-login" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7);
 backdrop-filter:blur(4px); align-items:center; justify-content:center; z-index:99990; text-align:center;">
   <div style="background:white; padding:20px; border-radius:10px; width:300px;">
@@ -559,10 +565,10 @@ backdrop-filter:blur(4px); align-items:center; justify-content:center; z-index:9
 
   <button onclick="closeAdminPanel()" style="margin-top:20px; width:100%; padding:10px; background:#aaa;">Zamknij panel</button>
 </div>
-   
+     
+</script>
 <script>
-<script>
-const ADMIN_LOGIN = "Miasto Sulejówek";
+const ADMIN_LOGIN = "miastosulejowek";
 const ADMIN_PASS = "11021974";
 
 document.getElementById("admin-btn").onclick = () => {
@@ -637,7 +643,7 @@ function loadLine() {
     </button>
   `;
 
-  document.getElementById("admin-editor").innerHTML = html;
+  document.getElementById("admin-editor").innerHTML ml;
 }
 
 function deleteStop(line, stop) {
@@ -682,11 +688,11 @@ function addTime(stop) {
   scheduleData[stop].push(newTime);
   alert("Dodano godzinę!");
   loadLine();
-}
 </script>
 
-  </script>   
+    
 </body>
+</html>
 
 
 
