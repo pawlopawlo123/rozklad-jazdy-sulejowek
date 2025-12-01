@@ -105,6 +105,32 @@
     .time { cursor: pointer; color: inherit; } /* minuty bez koloru */
     .time u { text-decoration: underline; } /* tylko podkreślenie minut */
 
+/* Girlanda świąteczna */
+#christmas-lights {
+  width: 100%;
+  height: 40px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.bulb {
+  width: 12px;
+  height: 12px;
+  margin: 0 4px;
+  display: inline-block;
+  border-radius: 50%;
+  animation: glow 1.5s infinite ease-in-out;
+}
+
+.red { background: #ff4d4d; animation-delay: 0s; }
+.green { background: #4dff4d; animation-delay: .3s; }
+.yellow { background: #ffff66; animation-delay: .6s; }
+.blue { background: #66a3ff; animation-delay: .9s; }
+
+@keyframes glow {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
      
   </style>
 </head>
@@ -521,9 +547,58 @@ if ('serviceWorker' in navigator) {
     setInterval(updateDateTime, 1000);
   });
 </script>
+<script>
+<script>
+// Efekt padającego śniegu
+document.addEventListener("DOMContentLoaded", () => {
+  let snow = document.createElement("div");
+  snow.className = "snowflakes";
+  snow.innerHTML = `
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❅</div>
+    <div class="snowflake">❆</div>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❅</div>
+    <div class="snowflake">❆</div>
+  `;
+  document.body.appendChild(snow);
+});
+</script>
+
+<style>
+/* Padający śnieg */
+.snowflakes {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9998;
+  overflow: hidden;
+}
+
+.snowflake {
+  position: absolute;
+  top: -10px;
+  font-size: 24px;
+  color: white;
+  animation: fall 8s linear infinite;
+  user-select: none;
+}
+
+.snowflake:nth-child(odd) { animation-duration: 11s; }
+.snowflake:nth-child(even) { animation-duration: 7s; }
+
+@keyframes fall {
+  0% { transform: translateY(-10%); opacity: 1; }
+  100% { transform: translateY(110vh); opacity: 0; }
+}
+</style>
 
 </body>
 </html>
+
 
 
 
