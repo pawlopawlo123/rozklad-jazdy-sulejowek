@@ -105,32 +105,31 @@
     .time { cursor: pointer; color: inherit; } /* minuty bez koloru */
     .time u { text-decoration: underline; } /* tylko podkreślenie minut */
 
-/* Girlanda świąteczna */
-#christmas-lights {
+<style>
+/* Animowana girlanda LED */
+#christmas-garland {
   width: 100%;
-  height: 40px;
-  text-align: center;
-  margin-bottom: 10px;
+  height: 60px;
+  background: url('https://i.imgur.com/sZPq6me.png') repeat-x center;
+  background-size: contain;
+  animation: lights 1s infinite alternate;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
 }
 
-.bulb {
-  width: 12px;
-  height: 12px;
-  margin: 0 4px;
-  display: inline-block;
-  border-radius: 50%;
-  animation: glow 1.5s infinite ease-in-out;
+@keyframes lights {
+  0% { filter: brightness(0.6); }
+  100% { filter: brightness(1.4); }
 }
 
-.red { background: #ff4d4d; animation-delay: 0s; }
-.green { background: #4dff4d; animation-delay: .3s; }
-.yellow { background: #ffff66; animation-delay: .6s; }
-.blue { background: #66a3ff; animation-delay: .9s; }
-
-@keyframes glow {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.3); }
+/* aby girlanda nie zasłaniała treści */
+body {
+  padding-top: 70px !important;
 }
+</style>
+
      
   </style>
 </head>
@@ -598,6 +597,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
+
 
 
 
