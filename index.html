@@ -104,87 +104,7 @@
     .time u { text-decoration: underline; } /* tylko podkreślenie minut */
 
 
-/* Animowana girlanda LED */
-<div id="christmas-garland"></div>{
-  width: 100%;
-  height: 60px;
-  background: url('https://i.imgur.com/sZPq6me.png') repeat-x center;
-  background-size: contain;
-  animation: lights 1s infinite alternate;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-}
 
-@keyframes lights {
-  0% { filter: brightness(0.6); }
-  100% { filter: brightness(1.4); }
-}
-
-/* aby girlanda nie zasłaniała treści */
-body{
-  padding-top: 70px !important;
-}
-</style>
-
-  <style>
-body.light-theme {
-  background: #f4f4f4 !important;
-  color: #000 !important;
-}
-
-body.dark-theme {
-  background: #121212 !important;
-  color: #fff !important;
-}
-
-/* Kolor tekstu wewnątrz wszystkich elementów */
-body.dark-theme h1,
-body.dark-theme p,
-body.dark-theme label,
-body.dark-theme div,
-body.dark-theme select,
-body.dark-theme option,
-body.dark-theme button {
-  color: #fff !important;
-}
-
-/* Tabele rozkładu */
-body.dark-theme .timetable {
-  background: #1e1e1e !important;
-  border-color: #444 !important;
-}
-
-/* Select + buttons */
-body.dark-theme select,
-body.dark-theme button {
-  background: #222 !important;
-  color: #fff !important;
-  border: 1px solid #555 !important;
-}
-
-/* Girlanda i śnieg zostają bez zmian */
-</style>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const toggle = document.getElementById("theme-toggle");
-
-  // domyślnie — jasny motyw
-  document.body.classList.add("light-theme");
-
-  toggle.addEventListener("click", () => {
-    document.body.classList.toggle("dark-theme");
-    document.body.classList.toggle("light-theme");
-
-    toggle.textContent =
-      document.body.classList.contains("dark-theme")
-        ? "Tryb jasny"
-        : "Tryb ciemny";
-  });
-});
-</script>
 
      
   </style>
@@ -649,6 +569,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
+
 
 
 
