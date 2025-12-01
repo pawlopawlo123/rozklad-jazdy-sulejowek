@@ -107,7 +107,7 @@
 
 
 /* Animowana girlanda LED */
-#christmas-garland {
+<div id="christmas-garland"></div>{
   width: 100%;
   height: 60px;
   background: url('https://i.imgur.com/sZPq6me.png') repeat-x center;
@@ -541,12 +541,14 @@ if ('serviceWorker' in navigator) {
     document.getElementById("datetime").textContent = `${date}, ${time}`;
   }
 
-  window.addEventListener("DOMContentLoaded", () => {
-    updateDateTime();
-    setInterval(updateDateTime, 1000);
-  });
+ window.addEventListener("DOMContentLoaded", () => {
+  updateDateTime();
+  setInterval(updateDateTime, 1000);
+});
+</script>
+
+<!-- ŚNIEG -->
 <script>
-// Efekt padającego śniegu
 document.addEventListener("DOMContentLoaded", () => {
   let snow = document.createElement("div");
   snow.className = "snowflakes";
@@ -563,7 +565,6 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 <style>
-/* Padający śnieg */
 .snowflakes {
   pointer-events: none;
   position: fixed;
@@ -574,7 +575,6 @@ document.addEventListener("DOMContentLoaded", () => {
   z-index: 9998;
   overflow: hidden;
 }
-
 .snowflake {
   position: absolute;
   top: -10px;
@@ -583,17 +583,17 @@ document.addEventListener("DOMContentLoaded", () => {
   animation: fall 8s linear infinite;
   user-select: none;
 }
-
 .snowflake:nth-child(odd) { animation-duration: 11s; }
 .snowflake:nth-child(even) { animation-duration: 7s; }
-
 @keyframes fall {
   0% { transform: translateY(-10%); opacity: 1; }
   100% { transform: translateY(110vh); opacity: 0; }
 }
-</script>
+</style>
+
 </body>
 </html>
+
 
 
 
