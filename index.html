@@ -103,19 +103,12 @@
     .time { cursor: pointer; color: inherit; } /* minuty bez koloru */
     .time u { text-decoration: underline; } /* tylko podkreślenie minut */
 
-
-   <style>
-body.light-theme {
-  background: #f4f4f4 !important;
-  color: #000 !important;
-}
-
+<style>
 body.dark-theme {
   background: #121212 !important;
-  color: #fff !important;
+  color: #ffffff !important;
 }
 
-/* Kolor tekstu wewnątrz wszystkich elementów */
 body.dark-theme h1,
 body.dark-theme p,
 body.dark-theme label,
@@ -123,44 +116,22 @@ body.dark-theme div,
 body.dark-theme select,
 body.dark-theme option,
 body.dark-theme button {
-  color: #fff !important;
+  color: #ffffff !important;
 }
 
-/* Tabele rozkładu */
 body.dark-theme .timetable {
   background: #1e1e1e !important;
-  border-color: #444 !important;
+  border-color: #555 !important;
 }
 
-/* Select + buttons */
 body.dark-theme select,
 body.dark-theme button {
   background: #222 !important;
-  color: #fff !important;
-  border: 1px solid #555 !important;
+  border: 1px solid #777 !important;
 }
-
-/* Girlanda i śnieg zostają bez zmian */
 </style>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const toggle = document.getElementById("theme-toggle");
-
-  // domyślnie — jasny motyw
-  document.body.classList.add("light-theme");
-
-  toggle.addEventListener("click", () => {
-    document.body.classList.toggle("dark-theme");
-    document.body.classList.toggle("light-theme");
-
-    toggle.textContent =
-      document.body.classList.contains("dark-theme")
-        ? "Tryb jasny"
-        : "Tryb ciemny";
-  });
-});
-</script>
+   
 
 
 </head>
@@ -580,20 +551,29 @@ if ('serviceWorker' in navigator) {
 });
 </script>
 
-<!-- ŚNIEG -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  let snow = document.createElement("div");
-  snow.className = "snowflakes";
-  snow.innerHTML = `
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❅</div>
-    <div class="snowflake">❆</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❅</div>
-    <div class="snowflake">❆</div>
-  `;
-  document.body.appendChild(snow);
+  const snowContainer = document.createElement("div");
+  snowContainer.classList.add("snowflakes");
+  document.body.appendChild(snowContainer);
+
+  // Tworzymy 50 płatków śniegu
+  for (let i = 0; i < 50; i++) {
+    const flake = document.createElement("div");
+    flake.className = "snowflake";
+    flake.textContent = "❄";
+
+    // losowa pozycja X
+    flake.style.left = Math.random() * 100 + "vw";
+
+    // losowy czas spadania
+    flake.style.animationDuration = 5 + Math.random() * 10 + "s";
+
+    // różne wielkości
+    flake.style.fontSize = 10 + Math.random() * 25 + "px";
+
+    snowContainer.appendChild(flake);
+  }
 });
 </script>
 
@@ -603,29 +583,50 @@ document.addEventListener("DOMContentLoaded", () => {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 9998;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
+  z-index: 9998;
 }
+
 .snowflake {
   position: absolute;
   top: -10px;
-  font-size: 24px;
   color: white;
-  animation: fall 8s linear infinite;
-  user-select: none;
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  opacity: 0.9;
 }
-.snowflake:nth-child(odd) { animation-duration: 11s; }
-.snowflake:nth-child(even) { animation-duration: 7s; }
+
 @keyframes fall {
-  0% { transform: translateY(-10%); opacity: 1; }
-  100% { transform: translateY(110vh); opacity: 0; }
+  0% {
+    transform: translateY(-10vh);
+  }
+  100% {
+    transform: translateY(110vh);
+  }
 }
 </style>
 
+<script>
+// USTAWIAMY CIEMNY MOTYW NA STAŁE
+document.addEventListener("DOMContentLoaded", () => {
+  document.body.classList.add("dark-theme");
+
+  // zapisujemy do pamięci przeglądarki
+  localStorage.setItem("theme", "dark");
+});
+
+// po odświeżeniu zostaje ciemny
+if (localStorage.getItem("theme") === "dark") {
+  document.body.classList.add("dark-theme");
+}
+</script>
+
 </body>
 </html>
+
 
 
 
