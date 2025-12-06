@@ -136,7 +136,33 @@ html, body {
 }
 </style>
 
-  
+/* PRZYWRÓCENIE STAREGO UKŁADU STRONY */
+body {
+  padding: 20px !important;   /* przywraca poprzednie marginesy */
+}
+
+  <style>
+/* Stara szerokość kontenera */
+.container {
+  max-width: 600px !important;   /* wcześniej było 600 */
+  margin: 0 auto !important;
+}
+
+/* Selecty i przycisk – przywrócenie szerokości */
+select, button {
+  width: 100% !important;     /* pełna szerokość jak kiedyś */
+  padding: 10px !important;
+  margin: 10px 0 !important;
+}
+
+/* Tabela godzin – powrót wyglądu */
+.timetable {
+  padding: 15px !important;
+  border-radius: 8px !important;
+}
+
+</style>
+    
 </head>
   </style>
 </head>
@@ -596,6 +622,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
+
 
 
 
