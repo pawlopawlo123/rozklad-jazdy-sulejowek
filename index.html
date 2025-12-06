@@ -102,64 +102,48 @@
 
 <style>
 
-/* ------------------ MOTYW JASNY ------------------ */
-body.light-theme {
-  background: #f4f4f4 !important;
-  color: #000 !important;
-}
-
-/* ------------------ MOTYW CIEMNY ------------------ */
+/* ciemny motyw dla całej aplikacji (oprócz ekranu powitalnego) */
 body.dark-theme {
-  background: #0d0d0d !important;
-  color: #fff !important;
+  background: #0f0f0f !important;
+  color: #ffffff !important;
 }
 
-/* Tekst w całej aplikacji */
+/* wymuszamy białe teksty */
 body.dark-theme h1,
 body.dark-theme h2,
 body.dark-theme p,
 body.dark-theme label,
+body.dark-theme div,
 body.dark-theme select,
 body.dark-theme option,
 body.dark-theme button,
-body.dark-theme div,
-body.dark-theme a {
-  color: #fff !important;
+body.dark-theme .timetable {
+  color: #ffffff !important;
 }
 
-/* Kontenery i tabele */
-body.dark-theme .timetable,
-body.dark-theme .container {
+/* tabele */
+body.dark-theme .timetable {
   background: #1a1a1a !important;
-  color: #fff !important;
-  border-color: #444 !important;
+  border: 1px solid #333 !important;
 }
 
-/* Selecty i przyciski */
+/* selecty i przyciski */
 body.dark-theme select,
 body.dark-theme button {
   background: #222 !important;
   color: #fff !important;
-  border: 1px solid #555 !important;
+  border: 1px solid #444 !important;
 }
 
-/* Podkreślenia minut */
-body.dark-theme .time u {
-  color: #fff !important;
-}
-
-</style>
-
-  <style>
-/* Cała strona w ciemnym kolorze, bez jasnej ramki */
-body.dark-theme {
-  background: #000 !important;   /* ciemne tło */
-  color: #fff !important;
+/* usuwamy czarną ramkę wokół aplikacji */
+html, body {
   margin: 0 !important;
-  padding: 0 !important; 
+  padding: 0 !important;
+  background: none !important;
 }
-    
+
 </style>
+
     
 </head>
   </style>
@@ -611,20 +595,16 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
     
-
 <script>
-// Stały motyw ciemny
+// ustawiamy ciemny tryb zawsze
 document.addEventListener("DOMContentLoaded", () => {
-
-  // Zawsze ustawiamy dark theme
-  document.body.classList.remove("light-theme");
   document.body.classList.add("dark-theme");
-
 });
 </script>
-    
+
 </body>
 </html>
+
 
 
 
