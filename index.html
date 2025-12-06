@@ -101,50 +101,42 @@
     .time u { text-decoration: underline; } /* tylko podkreślenie minut */
 
 <style>
-
-/* ciemny motyw dla całej aplikacji (oprócz ekranu powitalnego) */
-body.dark-theme {
-  background: #0f0f0f !important;
-  color: #ffffff !important;
+/* CAŁY CZAS aktywny ciemny motyw */
+body {
+  background: #121212 !important;
+  color: #fff !important;
 }
 
-/* wymuszamy białe teksty */
-body.dark-theme h1,
-body.dark-theme h2,
-body.dark-theme p,
-body.dark-theme label,
-body.dark-theme div,
-body.dark-theme select,
-body.dark-theme option,
-body.dark-theme button,
-body.dark-theme .timetable {
-  color: #ffffff !important;
+/* Wszystkie teksty */
+h1, h2, h3, p, label, div, select, option, button, span, a {
+  color: #fff !important;
 }
 
-/* tabele */
-body.dark-theme .timetable {
-  background: #1a1a1a !important;
+/* Białe linki */
+a { color: #9ecbff !important; }
+
+/* Tabela rozkładu */
+.timetable {
+  background: #1e1e1e !important;
   border: 1px solid #333 !important;
 }
 
-/* selecty i przyciski */
-body.dark-theme select,
-body.dark-theme button {
+/* Selecty i przyciski */
+select, button {
   background: #222 !important;
   color: #fff !important;
-  border: 1px solid #444 !important;
+  border: 1px solid #555 !important;
 }
 
-/* usuwamy czarną ramkę wokół aplikacji */
+/* Usuń białą ramkę dookoła aplikacji */
 html, body {
+  background-color: #121212 !important;
   margin: 0 !important;
   padding: 0 !important;
-  background: none !important;
 }
-
 </style>
 
-    
+  
 </head>
   </style>
 </head>
@@ -604,6 +596,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
+
 
 
 
