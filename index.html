@@ -596,24 +596,10 @@ document.addEventListener("DOMContentLoaded", () => {
   document.body.appendChild(snowContainer);
 });
 </script>
-
-<script>
-// USTAWIAMY CIEMNY MOTYW NA STAŁE
-document.addEventListener("DOMContentLoaded", () => {
-  document.body.classList.add("dark-theme");
-
-  // zapisujemy do pamięci przeglądarki
-  localStorage.setItem("theme", "dark");
-});
-
-// po odświeżeniu zostaje ciemny
-if (localStorage.getItem("theme") === "dark") {
-  document.body.classList.add("dark-theme");
-}
-</script>
-
+    
 </body>
 </html>
+
 
 
 
