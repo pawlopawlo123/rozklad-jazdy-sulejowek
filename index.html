@@ -85,9 +85,6 @@
 <meta name="theme-color" content="#f0c000">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <button id="theme-toggle" style="width:auto; padding:8px 15px; margin-bottom:15px;">
-  Tryb ciemny
-</button>
   <title>Rozkład jazdy Autobusów w Sulejówku</title>
    <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f4f4f4; }
@@ -104,32 +101,57 @@
     .time u { text-decoration: underline; } /* tylko podkreślenie minut */
 
 <style>
-body.dark-theme {
+/* CAŁY CZAS CIEMNY MOTYW */
+body {
   background: #121212 !important;
-  color: #ffffff !important;
+  color: #fff !important;
 }
 
-body.dark-theme h1,
-body.dark-theme p,
-body.dark-theme label,
-body.dark-theme div,
-body.dark-theme select,
-body.dark-theme option,
-body.dark-theme button {
-  color: #ffffff !important;
+/* WSZYSTKIE NAPISY */
+h1, p, label, div, select, option, button, strong, b {
+  color: #fff !important;
 }
 
-body.dark-theme .timetable {
+/* Tabele rozkładu */
+.timetable {
   background: #1e1e1e !important;
-  border-color: #555 !important;
+  border: 1px solid #444 !important;
 }
 
-body.dark-theme select,
-body.dark-theme button {
+/* Select + buttons */
+select, button {
   background: #222 !important;
-  border: 1px solid #777 !important;
+  color: #fff !important;
+  border: 1px solid #555 !important;
+}
+
+/* ❄❄❄ PADAJĄCY ŚNIEG — pełny ekran ❄❄❄ */
+.snowflakes {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9998;
+  overflow: hidden;
+}
+
+.snowflake {
+  position: absolute;
+  top: -10px;
+  font-size: 24px;
+  color: white;
+  animation: fall linear infinite;
+  user-select: none;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-10%); opacity: 1; }
+  100% { transform: translateY(110vh); opacity: 0; }
 }
 </style>
+
 
    
 
@@ -552,62 +574,28 @@ if ('serviceWorker' in navigator) {
 </script>
 
 <script>
+// ❄ Generowanie wielu płatków śniegu ❄
 document.addEventListener("DOMContentLoaded", () => {
   const snowContainer = document.createElement("div");
-  snowContainer.classList.add("snowflakes");
-  document.body.appendChild(snowContainer);
+  snowContainer.className = "snowflakes";
 
-  // Tworzymy 50 płatków śniegu
+  // 50 płatków
   for (let i = 0; i < 50; i++) {
-    const flake = document.createElement("div");
-    flake.className = "snowflake";
-    flake.textContent = "❄";
+    const snow = document.createElement("div");
+    snow.className = "snowflake";
+    snow.textContent = "❄";
 
-    // losowa pozycja X
-    flake.style.left = Math.random() * 100 + "vw";
+    // losowa pozycja i prędkość
+    snow.style.left = Math.random() * 100 + "vw";
+    snow.style.animationDuration = 5 + Math.random() * 10 + "s";
+    snow.style.fontSize = 12 + Math.random() * 28 + "px";
 
-    // losowy czas spadania
-    flake.style.animationDuration = 5 + Math.random() * 10 + "s";
-
-    // różne wielkości
-    flake.style.fontSize = 10 + Math.random() * 25 + "px";
-
-    snowContainer.appendChild(flake);
+    snowContainer.appendChild(snow);
   }
+
+  document.body.appendChild(snowContainer);
 });
 </script>
-
-<style>
-.snowflakes {
-  pointer-events: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  z-index: 9998;
-}
-
-.snowflake {
-  position: absolute;
-  top: -10px;
-  color: white;
-  animation-name: fall;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  opacity: 0.9;
-}
-
-@keyframes fall {
-  0% {
-    transform: translateY(-10vh);
-  }
-  100% {
-    transform: translateY(110vh);
-  }
-}
-</style>
 
 <script>
 // USTAWIAMY CIEMNY MOTYW NA STAŁE
@@ -626,6 +614,7 @@ if (localStorage.getItem("theme") === "dark") {
 
 </body>
 </html>
+
 
 
 
