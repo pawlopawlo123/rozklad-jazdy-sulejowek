@@ -392,6 +392,8 @@
     const scheduleDiv = document.getElementById("schedule");
     const routeDiv = document.getElementById("route");
 
+    
+    
      function populateStops() {
       const line = lineSelect.value;
       stopSelect.innerHTML = "";
@@ -401,9 +403,6 @@
         opt.textContent = stop;
         stopSelect.appendChild(opt);
       });
-
-       stopSelect.selectedIndex = 0;
-       showSchedule();
     }
     
      function showSchedule() { 
@@ -454,10 +453,6 @@ function showRoute(time) {
     routeDiv.innerHTML = "<p>Brak trasy dla tego kursu.</p>";
     return;
   }
-  const routeLines = stops .map(stop => { const arr = scheduleData[stop]; 
-  if (!arr || !arr[idx]) return null; null .join("<br>");
-  routeDiv.innerHTML = "<strong>Trasa przejazdu:</strong><br>" + routeLines; }
-}
     
   lineSelect.addEventListener("change", populateStops); 
   window.addEventListener("DOMContentLoaded", populateStops);
@@ -509,6 +504,7 @@ if ('serviceWorker' in navigator) {
     
 </body>
 </html>
+
 
 
 
