@@ -459,7 +459,7 @@ const routeLines = stops
 .map(stop => { 
   const arr = scheduleData[stop]; 
   if (!arr || !arr[idx]) return null; // pomiń przystanki bez tego kursu
-  return ${arr[idx]} ${stop}; 
+  return ${arr[idx]} ${stop}'; 
 }) 
   .filter(Boolean) // usuń null 
   .join("<br>"); 
@@ -516,6 +516,7 @@ if ('serviceWorker' in navigator) {
     
 </body>
 </html>
+
 
 
 
