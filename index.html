@@ -444,7 +444,7 @@ function showRoute(time) {
 
   // znajdź przystanek aktualnie wybrany
   const currentStop = stopSelect.value;
-  const currentTimes = scheduleData[currentStop] ||[];
+  const currentTimes = scheduleData[currentStop] || [];
 
   // znajdź dokładny indeks klikniętej minuty w tym przystanku
   const idx = currentTimes.indexOf(time);
@@ -452,6 +452,7 @@ function showRoute(time) {
     routeDiv.innerHTML = "<p>Brak trasy dla tego kursu.</p>";
     return;
   }
+}
 
   </script>
   <script>
@@ -501,6 +502,7 @@ if ('serviceWorker' in navigator) {
     
 </body>
 </html>
+
 
 
 
