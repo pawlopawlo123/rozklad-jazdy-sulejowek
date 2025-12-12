@@ -453,6 +453,7 @@ function showRoute(time) {
   if (idx === -1){
     routeDiv.innerHTML = "<p>Brak trasy dla tego kursu.</p>";
     return;
+   }
   }
     
   lineSelect.addEventListener("change", populateStops); 
@@ -505,6 +506,7 @@ if ('serviceWorker' in navigator) {
     
 </body>
 </html>
+
 
 
 
