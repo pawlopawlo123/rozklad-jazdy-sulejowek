@@ -108,6 +108,7 @@
   <img src="icon-128.png" alt="Logo aplikacji" id="intro-logo">
   <h1>🚍Rozkład Sulejówek🚍</h1>
   <p>Witam w aplikacji rozkładu jazdy!</p>
+  <p>UWAGA Z PRZYCZYN TECHNICZNYCH ROZKŁAD JAZDY I TRASY NIE DZIAŁAJĄ PRZEPRASZAM ZA UTRUDNIENIA</p>
   <button id="enter-btn">Przejdź do aplikacji</button>
 
 </button>
@@ -412,10 +413,9 @@
       return; 
       }
    // Grupowanie, ALE z zachowaniem oryginalnej kolejności z scheduleData
-  const grouped = [];
-  times.forEach(t => {
-    const [h, m] = t.split(":");
-    let group = grouped.find(g => g.hour === h);
+  const grouped = []; times.forEach(t => {
+  const [h, m] = t.split(":");  
+  let group = grouped.find(g => g.hour === h);
     if (!group) {
       group = { hour: h, minutes: [] };
       grouped.push(group);
@@ -444,7 +444,7 @@ function showRoute(time) {
 
   // znajdź przystanek aktualnie wybrany
   const currentStop = stopSelect.value;
-  const currentTimes = scheduleData[currentStop] || [];
+  const currentTimes = scheduleData[currentStop] ||[];
 
   // znajdź dokładny indeks klikniętej minuty w tym przystanku
   const idx = currentTimes.indexOf(time);
@@ -460,11 +460,11 @@ const routeLines = stops
 }) 
   .filter(Boolean) // usuń null 
   .join("<br>"); 
-  routeDiv.innerHTML = "<strong>Trasa przejazdu:</strong><br>" + routeLines; 
-  lineSelect.addEventListener("change", populateStops);
+  routeDiv.innerHTML = "<strong>Trasa przejazdu:</strong><br>" + routeLines;
 }
+    
+  lineSelect.addEventListener("change", populateStops);
   window.addEventListener("DOMContentLoaded", populateStops);
-
   </script>
   <script>
 if ('serviceWorker' in navigator) {
@@ -513,6 +513,7 @@ if ('serviceWorker' in navigator) {
     
 </body>
 </html>
+
 
 
 
