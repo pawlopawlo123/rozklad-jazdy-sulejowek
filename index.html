@@ -100,7 +100,30 @@
     .time { cursor: pointer; color: inherit; } /* minuty bez koloru */
     .time u { text-decoration: underline; } /* tylko podkreślenie minut */
 
+<style>
+.darkmode body,
+.darkmode .container,
+.darkmode .timetable,
+.darkmode .bus-info,
+.darkmode select,
+.darkmode button,
+.darkmode p,
+.darkmode h1,
+.darkmode label {
+    background-color: #111 !important;
+    color: #fff !important;
+    border-color: #fff !important;
+}
 
+.darkmode select,
+.darkmode button {
+    background-color: #222 !important;
+    color: #fff !important;
+}
+</style>
+
+
+     
 </head>
   </style>
 </head>
@@ -520,6 +543,7 @@ if ('serviceWorker' in navigator) {
     
 </body>
 </html>
+
 
 
 
