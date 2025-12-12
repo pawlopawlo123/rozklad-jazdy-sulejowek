@@ -392,9 +392,6 @@
     const scheduleDiv = document.getElementById("schedule");
     const routeDiv = document.getElementById("route");
 
-    window.addEventListener("DOMContentLoaded", populateStops);
-    lineSelect.addEventListener("change", populateStops);
-
      function populateStops() {
       const line = lineSelect.value;
       stopSelect.innerHTML = "";
@@ -516,6 +513,7 @@ if ('serviceWorker' in navigator) {
     
 </body>
 </html>
+
 
 
 
