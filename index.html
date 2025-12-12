@@ -392,10 +392,6 @@
     const scheduleDiv = document.getElementById("schedule");
     const routeDiv = document.getElementById("route");
 
-    lineSelect.addEventListener("change", populateStops);
-    populateStops(); // aby załadować przystanki przy starcie
-
-
      function populateStops() {
       const line = lineSelect.value;
       stopSelect.innerHTML = "";
@@ -415,6 +411,7 @@
       routeDiv.innerHTML = ""; 
       return; 
       }
+     
        
   // Grupowanie, ALE z zachowaniem oryginalnej kolejności z scheduleData
   const grouped = [];
@@ -506,6 +503,7 @@ if ('serviceWorker' in navigator) {
     
 </body>
 </html>
+
 
 
 
