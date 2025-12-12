@@ -392,6 +392,10 @@
     const scheduleDiv = document.getElementById("schedule");
     const routeDiv = document.getElementById("route");
 
+    lineSelect.addEventListener("change", populateStops);
+    populateStops(); // aby załadować przystanki przy starcie
+
+
      function populateStops() {
       const line = lineSelect.value;
       stopSelect.innerHTML = "";
@@ -501,6 +505,7 @@ if ('serviceWorker' in navigator) {
     
 </body>
 </html>
+
 
 
 
