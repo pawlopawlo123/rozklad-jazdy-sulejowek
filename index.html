@@ -392,11 +392,6 @@
     const scheduleDiv = document.getElementById("schedule");
     const routeDiv = document.getElementById("route");
 
-stopSelect.addEventListener("change", () => {
-  showSchedule();
-  routeDiv.innerHTML = "";
-});
-
      function populateStops() {
       const line = lineSelect.value;
       stopSelect.innerHTML = "";
@@ -506,6 +501,7 @@ if ('serviceWorker' in navigator) {
     
 </body>
 </html>
+
 
 
 
