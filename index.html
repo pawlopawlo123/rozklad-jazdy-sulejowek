@@ -456,22 +456,19 @@ function showRoute(time) {
     routeDiv.innerHTML = "<p>Brak trasy dla tego kursu.</p>";
     return;
   }
-  // Tworzymy HTML trasy
-  let html = "<strong>Trasa dla kursu " + time + ":</strong><br><ul>";
-  stops.forEach(stop => {
-    const stopTimes = scheduleData[stop] || [];
-    // jeśli ten przystanek ma czas zgodny z klikniętym indeksem, podświetlamy
-    let displayTime = stopTimes[idx] || "-";
-    if (stop === currentStop) {
-      html += `<li><b>${stop}: ${displayTime}</b></li>`;
-    } else {
-      html += `<li>${stop}: ${displayTime}</li>`;
-    }
-  });
-  html += "</ul>";
-
-  routeDiv.innerHTML = html;
+const routeLines = stops 
+.map(stop => { 
+  const arr = scheduleData[stop]; 
+  if (!arr || !arr[idx]) return null; // pomiń przystanki bez tego kursu
+  return ${arr[idx]} ${stop}; 
+}) 
+  .filter(Boolean) // usuń null 
+  .join("<br>"); 
+  routeDiv.innerHTML = "<strong>Trasa przejazdu:</strong><br>" + 
+  routeLines; 
  }
+  lineSelect.addEventListener("change", populateStops); 
+  window.addEventListener("DOMContentLoaded", populateStops);
   </script>
   <script>
 if ('serviceWorker' in navigator) {
@@ -520,6 +517,7 @@ if ('serviceWorker' in navigator) {
     
 </body>
 </html>
+
 
 
 
