@@ -101,24 +101,54 @@
     .time u { text-decoration: underline; } /* tylko podkreślenie minut */
 
 <style>
-.darkmode body,
-.darkmode .container,
-.darkmode .timetable,
-.darkmode .bus-info,
-.darkmode select,
-.darkmode button,
-.darkmode p,
-.darkmode h1,
-.darkmode label {
-    background-color: #111 !important;
-    color: #fff !important;
-    border-color: #fff !important;
+/* PODSTAWOWY CIEMNY MOTYW — UNIWERSALNY */
+.darkmode {
+    background-color: #121212 !important;
+    color: #ffffff !important;
 }
 
+/* wszystkie elementy tekstowe */
+.darkmode body,
+.darkmode h1,
+.darkmode h2,
+.darkmode h3,
+.darkmode p,
+.darkmode label,
+.darkmode span,
+.darkmode div {
+    background-color: #121212 !important;
+    color: #ffffff !important;
+}
+
+/* formularze, selecty, inputy */
+.darkmode input,
 .darkmode select,
+.darkmode textarea {
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+    border: 1px solid #444 !important;
+}
+
+/* przyciski */
 .darkmode button {
-    background-color: #222 !important;
+    background-color: #333 !important;
     color: #fff !important;
+    border: 1px solid #555 !important;
+}
+
+/* kontenery, boxy, tabelki */
+.darkmode .container,
+.darkmode .box,
+.darkmode .card,
+.darkmode .timetable,
+.darkmode .section {
+    background-color: #121212 !important;
+    color: #ffffff !important;
+}
+
+/* linki */
+.darkmode a {
+    color: #70aaff !important;
 }
 </style>
 
@@ -543,6 +573,7 @@ if ('serviceWorker' in navigator) {
     
 </body>
 </html>
+
 
 
 
