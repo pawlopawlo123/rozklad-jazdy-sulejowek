@@ -451,8 +451,13 @@ function showRoute(time) {
     routeDiv.innerHTML = "<p>Brak trasy dla tego kursu.</p>";
     return;
   }
+  const routeLines = stops .map(stop => { const arr = scheduleData[stop]; 
+  if (!arr || !arr[idx]) return null; null .join("<br>");
+  routeDiv.innerHTML = "<strong>Trasa przejazdu:</strong><br>" + routeLines; }
 }
-
+    
+  lineSelect.addEventListener("change", populateStops); 
+  window.addEventListener("DOMContentLoaded", populateStops);
   </script>
   <script>
 if ('serviceWorker' in navigator) {
@@ -501,6 +506,7 @@ if ('serviceWorker' in navigator) {
     
 </body>
 </html>
+
 
 
 
