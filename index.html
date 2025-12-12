@@ -99,10 +99,8 @@
     .timetable { background: white; padding: 15px; border-radius: 8px; }
     .time { cursor: pointer; color: inherit; } /* minuty bez koloru */
     .time u { text-decoration: underline; } /* tylko podkreślenie minut */
-
- 
-</head>
-  </style>
+  
+   </style>
 </head>
 <body>
 <div id="intro-screen">
@@ -393,7 +391,10 @@
     const scheduleDiv = document.getElementById("schedule");
     const routeDiv = document.getElementById("route");
 
-    function populateStops() {
+    lineSelect.addEventListener("change", populateStops);
+    window.addEventListener("DOMContentLoaded", populateStops);
+
+     function populateStops() {
       const line = lineSelect.value;
       stopSelect.innerHTML = "";
       (lineStops[line] || []).forEach(stop => {
@@ -503,6 +504,7 @@ if ('serviceWorker' in navigator) {
     
 </body>
 </html>
+
 
 
 
