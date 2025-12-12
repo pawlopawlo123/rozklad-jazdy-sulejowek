@@ -100,64 +100,7 @@
     .time { cursor: pointer; color: inherit; } /* minuty bez koloru */
     .time u { text-decoration: underline; } /* tylko podkreślenie minut */
 
-<style>
-/* CAŁY CZAS aktywny ciemny motyw */
-body {
-  background: #121212 !important;
-  color: #fff !important;
-}
-
-/* Wszystkie teksty */
-h1, h2, h3, p, label, div, select, option, button, span, a {
-  color: #fff !important;
-}
-
-/* Białe linki */
-a { color: #9ecbff !important; }
-
-/* Tabela rozkładu */
-.timetable {
-  background: #1e1e1e !important;
-  border: 1px solid #333 !important;
-}
-
-/* Selecty i przyciski */
-select, button {
-  background: #222 !important;
-  color: #fff !important;
-  border: 1px solid #555 !important;
-}
-
-/* Usuń białą ramkę dookoła aplikacji */
-html, body {
-  background-color: #121212 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-</style>
-
-  <style>
-/* Stara szerokość kontenera */
-.container {
-  max-width: 600px !important;   /* wcześniej było 600 */
-  margin: 0 auto !important;
-}
-
-/* Selecty i przycisk – przywrócenie szerokości */
-select, button {
-  width: 100% !important;     /* pełna szerokość jak kiedyś */
-  padding: 10px !important;
-  margin: 10px 0 !important;
-}
-
-/* Tabela godzin – powrót wyglądu */
-.timetable {
-  padding: 15px !important;
-  border-radius: 8px !important;
-}
-
-</style>
-    
+     
 </head>
   </style>
 </head>
@@ -574,49 +517,10 @@ if ('serviceWorker' in navigator) {
   setInterval(updateDateTime, 1000);
 });
 </script>
-
-<style>
-.snowflake {
-    position: fixed;
-    top: -10px;
-    color: white;
-    font-size: 20px;
-    pointer-events: none;
-    user-select: none;
-    animation: fall linear infinite;
-}
-
-@keyframes fall {
-  0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(110vh) rotate(360deg); opacity: 0.8; }
-}
-</style>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  for (let i = 0; i < 60; i++) {
-    const snow = document.createElement("div");
-    snow.className = "snowflake";
-    snow.textContent = ["❄","❅","❆"][Math.floor(Math.random()*3)];
     
-    snow.style.left = Math.random() * 100 + "vw";
-    snow.style.animationDuration = (5 + Math.random() * 7) + "s";
-    snow.style.fontSize = (15 + Math.random() * 25) + "px";
-
-    document.body.appendChild(snow);
-  }
-});
-</script>
-    
-<script>
-// ustawiamy ciemny tryb zawsze
-document.addEventListener("DOMContentLoaded", () => {
-  document.body.classList.add("dark-theme");
-});
-</script>
-
 </body>
 </html>
+
 
 
 
