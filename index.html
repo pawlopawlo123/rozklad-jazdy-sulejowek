@@ -99,7 +99,8 @@
     .timetable { background: white; padding: 15px; border-radius: 8px; }
     .time { cursor: pointer; color: inherit; } /* minuty bez koloru */
     .time u { text-decoration: underline; } /* tylko podkreślenie minut */
-  
+
+     
    </style>
 </head>
 <body>
@@ -391,11 +392,6 @@
     const scheduleDiv = document.getElementById("schedule");
     const routeDiv = document.getElementById("route");
 
-    lineSelect.addEventListener("change", populateStops);
-    window.addEventListener("DOMContentLoaded", populateStops);
-    stopSelect.addEventListener("change", showSchedule);
-
-
      function populateStops() {
       const line = lineSelect.value;
       stopSelect.innerHTML = "";
@@ -453,12 +449,11 @@ function showRoute(time) {
 
   // znajdź dokładny indeks klikniętej minuty w tym przystanku
   const idx = currentTimes.indexOf(time);
-  if (idx === -1) {
+  if (idx === -1) 
     routeDiv.innerHTML = "<p>Brak trasy dla tego kursu.</p>";
     return;
   }
-</script>
-    
+  </script>
   <script>
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js');
@@ -506,6 +501,7 @@ if ('serviceWorker' in navigator) {
     
 </body>
 </html>
+
 
 
 
