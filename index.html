@@ -456,7 +456,22 @@ function showRoute(time) {
     routeDiv.innerHTML = "<p>Brak trasy dla tego kursu.</p>";
     return;
   }
-}
+  // Tworzymy HTML trasy
+  let html = "<strong>Trasa dla kursu " + time + ":</strong><br><ul>";
+  stops.forEach(stop => {
+    const stopTimes = scheduleData[stop] || [];
+    // jeśli ten przystanek ma czas zgodny z klikniętym indeksem, podświetlamy
+    let displayTime = stopTimes[idx] || "-";
+    if (stop === currentStop) {
+      html += `<li><b>${stop}: ${displayTime}</b></li>`;
+    } else {
+      html += `<li>${stop}: ${displayTime}</li>`;
+    }
+  });
+  html += "</ul>";
+
+  routeDiv.innerHTML = html;
+ }
   </script>
   <script>
 if ('serviceWorker' in navigator) {
@@ -505,6 +520,7 @@ if ('serviceWorker' in navigator) {
     
 </body>
 </html>
+
 
 
 
