@@ -414,8 +414,7 @@
       routeDiv.innerHTML = ""; 
       return; 
       }
-       
-  // Grupowanie, ALE z zachowaniem oryginalnej kolejności z scheduleData
+   // Grupowanie, ALE z zachowaniem oryginalnej kolejności z scheduleData
   const grouped = [];
   times.forEach(t => {
     const [h, m] = t.split(":");
@@ -464,11 +463,11 @@ const routeLines = stops
 }) 
   .filter(Boolean) // usuń null 
   .join("<br>"); 
-  routeDiv.innerHTML = "<strong>Trasa przejazdu:</strong><br>" + 
-  routeLines; 
- }
-  lineSelect.addEventListener("change", populateStops); 
+  routeDiv.innerHTML = "<strong>Trasa przejazdu:</strong><br>" + routeLines; 
+  lineSelect.addEventListener("change", populateStops);
+}
   window.addEventListener("DOMContentLoaded", populateStops);
+
   </script>
   <script>
 if ('serviceWorker' in navigator) {
@@ -517,6 +516,7 @@ if ('serviceWorker' in navigator) {
     
 </body>
 </html>
+
 
 
 
