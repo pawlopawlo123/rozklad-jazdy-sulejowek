@@ -108,7 +108,6 @@
   <img src="icon-128.png" alt="Logo aplikacji" id="intro-logo">
   <h1>🚍Rozkład Sulejówek🚍</h1>
   <p>Witam w aplikacji rozkładu jazdy!</p>
-  <p>UWAGA Z PRZYCZYN TECHNICZNYCH ROZKŁAD JAZDY I TRASY NIE DZIAŁAJĄ PRZEPRASZAM ZA UTRUDNIENIA</p>
   <button id="enter-btn">Przejdź do aplikacji</button>
 
 </button>
@@ -131,7 +130,7 @@
     <select id="stopSelect"></select>
     <button onclick="showSchedule()">Pokaż rozkład jazdy</button>
     
-  <p>Z PRZYCZYN TECHNICZNYCH TRASA NIE DZIAŁA PRZEPRASZAM ZA UTRUDNIENIA</p>
+  
     <div id="schedule" class="timetable"></div>
     <div id="route" class="timetable" style="margin-top:10px;"></div>
   <p>ROZKŁAD JAZDY LINII PÓŁNOCNEJ WAŻNY OD 15.12.2025r.</p>
@@ -393,6 +392,11 @@
     const scheduleDiv = document.getElementById("schedule");
     const routeDiv = document.getElementById("route");
 
+stopSelect.addEventListener("change", () => {
+  showSchedule();
+  routeDiv.innerHTML = "";
+});
+
      function populateStops() {
       const line = lineSelect.value;
       stopSelect.innerHTML = "";
@@ -502,6 +506,7 @@ if ('serviceWorker' in navigator) {
     
 </body>
 </html>
+
 
 
 
