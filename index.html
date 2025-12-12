@@ -515,22 +515,7 @@ function enableDarkMode() {
 </script>
 
 
-  // pokaż tylko przystanki, które mają czas dla tego kursu
-  const routeLines = stops
-    .map(stop => {
-      const arr = scheduleData[stop];
-      if (!arr || !arr[idx]) return null; // pomiń przystanki bez tego kursu
-      return `${arr[idx]} ${stop}`;
-    })
-    .filter(Boolean) // usuń null
-    .join("<br>");
 
-  routeDiv.innerHTML = "<strong>Trasa przejazdu:</strong><br>" + routeLines;
-}
-
-
-    lineSelect.addEventListener("change", populateStops);
-    window.addEventListener("DOMContentLoaded", populateStops);
   </script>
   <script>
 if ('serviceWorker' in navigator) {
@@ -579,6 +564,7 @@ if ('serviceWorker' in navigator) {
     
 </body>
 </html>
+
 
 
 
