@@ -401,6 +401,9 @@
         opt.textContent = stop;
         stopSelect.appendChild(opt);
       });
+
+       stopSelect.selectedIndex = 0;
+       showSchedule();
     }
     
      function showSchedule() { 
@@ -506,6 +509,7 @@ if ('serviceWorker' in navigator) {
     
 </body>
 </html>
+
 
 
 
