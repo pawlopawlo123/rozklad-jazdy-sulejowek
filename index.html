@@ -76,6 +76,17 @@
   left: 20px;
   font-family: 'Arial', sans-serif;
 }
+
+ #snow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9998;
+}
+   
 </style>
  <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -558,8 +569,62 @@ if ('serviceWorker' in navigator) {
 });
 </script>
 
+<canvas id="snow"></canvas>    
+
+<script>
+const canvas = document.getElementById("snow");
+const ctx = canvas.getContext("2d");
+
+let w, h;
+function resize() {
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resize);
+resize();
+
+const flakes = Array.from({ length: 150 }, () => ({
+  x: Math.random() * w,
+  y: Math.random() * h,
+  r: Math.random() * 3 + 1,
+  d: Math.random() + 0.5
+}));
+
+function drawSnow() {
+  ctx.clearRect(0, 0, w, h);
+  ctx.fillStyle = "white";
+  ctx.beginPath();
+
+  flakes.forEach(f => {
+    ctx.moveTo(f.x, f.y);
+    ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+  });
+
+  ctx.fill();
+  moveSnow();
+}
+
+function moveSnow() {
+  flakes.forEach(f => {
+    f.y += f.d;
+    if (f.y > h) {
+      f.y = -5;
+      f.x = Math.random() * w;
+    }
+  });
+}
+
+function animate() {
+  drawSnow();
+  requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+
 </body>
 </html>
+
 
 
 
