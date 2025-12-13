@@ -558,30 +558,9 @@ if ('serviceWorker' in navigator) {
 });
 </script>
 
-@keyframes fall {
-  0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(110vh) rotate(360deg); opacity: 0.8; }
-}
-</style>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  for (let i = 0; i < 60; i++) {
-    const snow = document.createElement("div");
-    snow.className = "snowflake";
-    snow.textContent = ["❄","❅","❆"][Math.floor(Math.random()*3)];
-    
-    snow.style.left = Math.random() * 100 + "vw";
-    snow.style.animationDuration = (5 + Math.random() * 7) + "s";
-    snow.style.fontSize = (15 + Math.random() * 25) + "px";
-
-    document.body.appendChild(snow);
-  }
-});
-</script>
-    
 </body>
 </html>
+
 
 
 
