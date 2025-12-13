@@ -447,15 +447,27 @@ function showRoute(time) {
   // znajdź przystanek aktualnie wybrany
   const currentStop = stopSelect.value;
   const currentTimes = scheduleData[currentStop] || [];
-
-  // znajdź dokładny indeks klikniętej minuty w tym przystanku
   const idx = currentTimes.indexOf(time);
+  
   if (idx === -1){
     routeDiv.innerHTML = "<p>Brak trasy dla tego kursu.</p>";
     return;
    }
-  }
-    
+
+  let html = `<strong>Trasa przejazdu dla kursu ${time}:</strong><br><br>`;
+
+   stops.forEach((stop, i) => {
+    const stopTimes = scheduleData[stop];
+    if (!stopTimes || !stopTimes[idx]) return;
+
+    const t = stopTimes[idx];
+    html += `<div><b>${t}</b> – ${stop}</div>`;
+  });
+
+  routeDiv.innerHTML = html;
+}
+</script>
+  
   lineSelect.addEventListener("change", populateStops); 
   window.addEventListener("DOMContentLoaded", populateStops);
   </script>
@@ -506,6 +518,7 @@ if ('serviceWorker' in navigator) {
     
 </body>
 </html>
+
 
 
 
