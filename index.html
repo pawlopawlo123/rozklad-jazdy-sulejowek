@@ -100,7 +100,40 @@
     .time { cursor: pointer; color: inherit; } /* minuty bez koloru */
     .time u { text-decoration: underline; } /* tylko podkreślenie minut */
 
-     
+     /* ===== CIEMNY MOTYW ===== */
+body.dark {
+  background: #121212;
+  color: #ffffff;
+}
+
+body.dark .container {
+  background: #121212;
+}
+
+body.dark .timetable {
+  background: #1e1e1e;
+  color: #ffffff;
+}
+
+body.dark select,
+body.dark button {
+  background: #1e1e1e;
+  color: #ffffff;
+  border: 1px solid #444;
+}
+
+body.dark h1,
+body.dark label,
+body.dark p,
+body.dark div {
+  color: #ffffff;
+}
+
+body.dark a {
+  color: #4da6ff;
+}
+
+
    </style>
 </head>
 <body>
@@ -488,11 +521,21 @@ if ('serviceWorker' in navigator) {
     startDateTime();
   }
 
+  if (localStorage.getItem('darkMode') === 'true') {
+  document.body.classList.add('dark');
+}
+
+
   enterBtn.addEventListener('click', () => {
-    intro.classList.add('hidden');
-    sessionStorage.setItem('introShown', 'true');
-    startDateTime();
-  });
+  intro.classList.add('hidden');
+  sessionStorage.setItem('introShown', 'true');
+
+  document.body.classList.add('dark');
+  localStorage.setItem('darkMode', 'true');
+
+  startDateTime();
+});
+
 
   function startDateTime() {
     clock.style.display = 'block';
@@ -514,9 +557,32 @@ if ('serviceWorker' in navigator) {
   setInterval(updateDateTime, 1000);
 });
 </script>
+
+@keyframes fall {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity: 0.8; }
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  for (let i = 0; i < 60; i++) {
+    const snow = document.createElement("div");
+    snow.className = "snowflake";
+    snow.textContent = ["❄","❅","❆"][Math.floor(Math.random()*3)];
+    
+    snow.style.left = Math.random() * 100 + "vw";
+    snow.style.animationDuration = (5 + Math.random() * 7) + "s";
+    snow.style.fontSize = (15 + Math.random() * 25) + "px";
+
+    document.body.appendChild(snow);
+  }
+});
+</script>
     
 </body>
 </html>
+
 
 
 
