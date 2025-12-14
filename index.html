@@ -470,7 +470,7 @@ body.dark a {
   });
 
   // Tworzymy HTML w dokładnej kolejności, jak w danych
-  let html = "<strong>Odjazdy (kliknij w minutę):</strong><br>";
+  let html = "<strong>🎅Odjazdy (kliknij w minutę)🎅:</strong><br>";
   grouped.forEach(g => {
     html += `<div><b>${g.hour}</b> `;
     html += g.minutes
@@ -498,7 +498,7 @@ function showRoute(time) {
     return;
    }
 
-  let html = `<strong>Trasa przejazdu dla kursu ${time}:</strong><br><br>`;
+  let html = `<strong>🎄Trasa przejazdu dla kursu ${time}🎄:</strong><br><br>`;
 
    stops.forEach((stop, i) => {
     const stopTimes = scheduleData[stop];
@@ -624,6 +624,7 @@ animate();
 
 </body>
 </html>
+
 
 
 
