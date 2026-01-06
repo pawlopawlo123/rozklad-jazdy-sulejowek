@@ -150,9 +150,9 @@ body.dark a {
 <body>
 <div id="intro-screen">
   <img src="icon-128.png" alt="Logo aplikacji" id="intro-logo">
-  <h1>🎅Rozkład Sulejówek🎅</h1>
-  <p>🎄Witam w aplikacji rozkładu jazdy!🎄</p>
-  <button id="enter-btn">🎁Przejdź do aplikacji🎁</button>
+  <h1>Rozkład Sulejówek</h1>
+  <p>Witam w aplikacji rozkładu jazdy!</p>
+  <button id="enter-btn">Przejdź do aplikacji</button>
 
 </button>
 </div>
@@ -161,30 +161,30 @@ body.dark a {
     <div id="date" style="display:none;"></div>
     <div id="clock" style="display:none;"></div>
     <p id="datetime" style="text-align:center; font-size:18px; margin: 5px 0; font-weight:bold;"></p>
-    <h1>🎅Rozkład jazdy🎅 Autobusów w Sulejówku</h1>
+    <h1>Rozkład jazdy Autobusów w Sulejówku</h1>
 
-    <label for="lineSelect">🎄Wybierz linię🎄:</label>
+    <label for="lineSelect">Wybierz linię:</label>
     <select id="lineSelect">
       <option value="Linia A1">Linia A1</option>
       <option value="Linia A2 kier. PKP Sulejówek (Kombatantów)">Linia A2 kier. PKP Sulejówek (Kombatantów)</option>
       <option value="Linia A2 kier. PKP Sulejówek Miłosna">Linia A2 kier. PKP Sulejówek Miłosna</option>
     </select>
 
-    <label for="stopSelect">🎄Wybierz przystanek🎄:</label>
+    <label for="stopSelect">Wybierz przystanek:</label>
     <select id="stopSelect"></select>
-    <button onclick="showSchedule()">🎅Pokaż rozkład jazdy🎅</button>
+    <button onclick="showSchedule()">Pokaż rozkład jazdy</button>
     
   
     <div id="schedule" class="timetable"></div>
     <div id="route" class="timetable" style="margin-top:10px;"></div>
-  <p>🎄ROZKŁAD JAZDY LINII A2 WAŻNY OD 02.01.2026r.🎄</p>
-  <p>🎁ROZKŁAD JAZDY LINII A1 WAŻNY OD 15.12.2025r.🎁</p>
-  <p>🎅UWAGA! W soboty, niedziele i święta linia A1 i A2 nie kursuje.🎅</p>
-  <p><span style="font-size:12.5pt;color:#169179;">🎁LINIA A1 i A2 JEST BEZPŁATNA🎁</span></p>
-  <p>🎄więcej informacji na temat linii A1 i A2
-   na stronie: <a href="https://www.sulejowek.pl/" class="link">https://www.sulejowek.pl/</a> w zakładce "komunikacja"🎄</p>
-  <p>🎅operatorem linii A1 i A2 jest ROBERT OPARA Przewóz Osób🎅</p>  
-  <p>🎁WSZYSTKIE KURSY REALIZOWANE POJAZDAMI NISKOPODŁOGOWYMI🎁</p>
+  <p>ROZKŁAD JAZDY LINII A2 WAŻNY OD 02.01.2026r.</p>
+  <p>ROZKŁAD JAZDY LINII A1 WAŻNY OD 15.12.2025r.</p>
+  <p>UWAGA! W soboty, niedziele i święta linia A1 i A2 nie kursuje.</p>
+  <p><span style="font-size:12.5pt;color:#169179;">LINIA A1 i A2 JEST BEZPŁATNA</span></p>
+  <p>więcej informacji na temat linii A1 i A2
+   na stronie: <a href="https://www.sulejowek.pl/" class="link">https://www.sulejowek.pl/</a> w zakładce "komunikacja"</p>
+  <p>operatorem linii A1 i A2 jest ROBERT OPARA Przewóz Osób</p>  
+  <p>WSZYSTKIE KURSY REALIZOWANE POJAZDAMI NISKOPODŁOGOWYMI</p>
   <script>
 
     const lineStops = {
@@ -436,7 +436,7 @@ body.dark a {
   });
 
   // Tworzymy HTML w dokładnej kolejności, jak w danych
-  let html = "<strong>🎅Odjazdy (kliknij w minutę)🎅:</strong><br>";
+  let html = "<strong>Odjazdy (kliknij w minutę):</strong><br>";
   grouped.forEach(g => {
     html += `<div><b>${g.hour}</b> `;
     html += g.minutes
@@ -464,7 +464,7 @@ function showRoute(time) {
     return;
    }
 
-  let html = `<strong>🎄Trasa przejazdu dla kursu ${time}🎄:</strong><br><br>`;
+  let html = `<strong>Trasa przejazdu dla kursu ${time}:</strong><br><br>`;
 
    stops.forEach((stop, i) => {
     const stopTimes = scheduleData[stop];
@@ -535,61 +535,11 @@ if ('serviceWorker' in navigator) {
 });
 </script>
 
-<canvas id="snow"></canvas>
 
-<script>
-const canvas = document.getElementById("snow");
-const ctx = canvas.getContext("2d");
-
-let w, h;
-function resize() {
-  w = canvas.width = window.innerWidth;
-  h = canvas.height = window.innerHeight;
-}
-window.addEventListener("resize", resize);
-resize();
-
-const flakes = Array.from({ length: 150 }, () => ({
-  x: Math.random() * w,
-  y: Math.random() * h,
-  r: Math.random() * 3 + 1,
-  d: Math.random() + 0.5
-}));
-
-function drawSnow() {
-  ctx.clearRect(0, 0, w, h);
-  ctx.fillStyle = "white";
-  ctx.beginPath();
-
-  flakes.forEach(f => {
-    ctx.moveTo(f.x, f.y);
-    ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
-  });
-
-  ctx.fill();
-  moveSnow();
-}
-
-function moveSnow() {
-  flakes.forEach(f => {
-    f.y += f.d;
-    if (f.y > h) {
-      f.y = -5;
-      f.x = Math.random() * w;
-    }
-  });
-}
-
-function animate() {
-  drawSnow();
-  requestAnimationFrame(animate);
-}
-
-animate();
-</script>
 
 </body>
 </html>
+
 
 
 
