@@ -143,66 +143,11 @@ body.dark div {
 body.dark a {
   color: #4da6ff;
 }
-
-/* Hamburger */
-#menu-btn {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  font-size: 26px;
-  cursor: pointer;
-  z-index: 10000;
-}
-
-/* Menu boczne */
-#side-menu {
-  position: fixed;
-  top: 0;
-  left: -220px;
-  width: 200px;
-  height: 100%;
-  background: #222;
-  color: #fff;
-  padding: 20px;
-  transition: left 0.3s ease;
-  z-index: 9999;
-}
-
-#side-menu.active {
-  left: 0;
-}
-
-#side-menu button {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-body.dark #side-menu {
-  background: #1e1e1e;
-}
-
-     
+   
    </style>
 </head>
 <body>
-  <!-- Hamburger -->
-<div id="menu-btn">☰</div>
-
-<!-- Menu boczne -->
-<div id="side-menu">
-  <h3>Menu</h3>
-  <button onclick="showUtrudnienia()">Utrudnienia</button>
-</div>
-
-<!-- Sekcja Utrudnienia -->
-<div id="utrudnienia" class="timetable" style="display:none; margin-top:10px;">
-  <h3>🚧 Utrudnienia</h3>
-  <p>Brak aktualnych utrudnień.</p>
-</div>
+  
 
 <div id="intro-screen">
   <img src="icon-128.png" alt="Logo aplikacji" id="intro-logo">
@@ -620,24 +565,9 @@ if ('serviceWorker' in navigator) {
 });
 </script>
 
-<script>
-const menuBtn = document.getElementById("menu-btn");
-const sideMenu = document.getElementById("side-menu");
-const utrudnienia = document.getElementById("utrudnienia");
-
-menuBtn.addEventListener("click", () => {
-  sideMenu.classList.toggle("active");
-});
-
-function showUtrudnienia() {
-  utrudnienia.style.display = "block";
-  sideMenu.classList.remove("active");
-}
-</script>
-
-
 </body>
 </html>
+
 
 
 
