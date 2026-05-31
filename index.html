@@ -169,6 +169,8 @@ body.dark a {
       <option value="Linia A1">Linia A1</option>
       <option value="Linia A2 kier. PKP Sulejówek">Linia A2 kier. PKP Sulejówek</option>
       <option value="Linia A2 kier. PKP Sulejówek Miłosna">Linia A2 kier. PKP Sulejówek Miłosna</option>
+      <option value="Linia W3 kier. Michałówek-Pętla">Linia W3 kier. Michałówek-Pętla</option>
+      <option value="Linia W3 kier. Kolejowa">Linia W3 kier. Kolejowa</option>
     </select>
 
     <label for="stopSelect">Wybierz przystanek:</label>
@@ -178,13 +180,18 @@ body.dark a {
   
     <div id="schedule" class="timetable"></div>
     <div id="route" class="timetable" style="margin-top:10px;"></div>
+  <p>ROZKŁAD JAZDY LINII W3 WAŻNY OD 01.01.2026r.</p>
   <p>ROZKŁAD JAZDY LINII A2 WAŻNY OD 02.01.2026r.</p>
   <p>ROZKŁAD JAZDY LINII A1 WAŻNY OD 02.03.2026r.</p>
-  <p>UWAGA! W soboty, niedziele i święta linia A1 i A2 nie kursuje.</p>
-  <p><span style="font-size:12.5pt;color:#169179;">LINIA A1 i A2 JEST BEZPŁATNA</span></p>
+  <p>UWAGA! W soboty, niedziele i święta linia A1,A2 i W3 nie kursuje.</p>
+  <p><span style="font-size:12.5pt;color:#169179;">LINIA A1,A2 i W3 JEST BEZPŁATNA</span></p>
   <p>więcej informacji na temat linii A1 i A2
    na stronie: <a href="https://www.sulejowek.pl/" class="link">https://www.sulejowek.pl/</a> w zakładce "komunikacja"</p>
+  <p> więcej informacji na temat linii W3 na stronie: <a href="https://woloszka.com.pl/" class="link">https://woloszka.com.pl/</a>
   <p>operatorem linii A1 i A2 jest ROBERT OPARA Przewóz Osób</p>  
+  <p>operatorem linii W3 jest Wołoszka sp.zoo.
+  <p>organizatorem linii A1 i A2 jest Urząd Miasta Sulejówek
+  <p>organizatorem linii W3 jest Urząd Gminy Wiązowna
   <p>WSZYSTKIE KURSY REALIZOWANE POJAZDAMI NISKOPODŁOGOWYMI</p>
   <script>
 
@@ -212,6 +219,16 @@ body.dark a {
         "Sulejówek Kossaka (01)", "Sulejówek Konwaliowa (01)", "Sulejówek Mariańska (01)", "Sulejówek Kasprowicza (02)",
         "Sulejówek Moniuszki (01)", "Sulejówek Legionów (01)", "Sulejówek Okuniewska (01)", "Sulejówek Ogińskiego (01)",
         "PKP Sulejówek |03|"],
+
+      "Linia W3 kier. Michałówek-Pętla": [
+      "Kolejowa (01)", "Dzielna (02)", "Kościuszki (02)", "Grabskiego (02)", "PKP Sulejówek (02)", "Bogusławskiego (02)",
+      "Iwaszkiewicza (01)", "Starzyńskiego (02)", "Batorego (01)", "Szklarniowa |02|", "Przejazd |02|", "Ogrodnicza (04)",
+      "Szkolna (01)", "Dębów (02)", "Miłego Dnia (02)", "Michałówek-Pętla (01)"],
+
+      "Linia W3 kier. Kolejowa": [
+      "Michałówek-Pętla |01|", "Miłego Dnia (01)", "Dębów (01)", "Szkolna (02)", "Ogrodnicza (02)", "Przejazd |01|", "Szklrniowa |01|",
+      "Batorego (02)", "Starzyńskiego (01)", "Iwaszkiewicza (02)", "Bogusławskiego (01)", "PKP Sulejówek (01)", "Grabskiego (01)",
+      "Kościuszki (01)", "Dzielna (01)", "Kolejowa (01)"],
     };
   
     const scheduleData = {
@@ -395,7 +412,70 @@ body.dark a {
 
       "PKP Sulejówek |03|": ["05:21", "06:03", "06:45", "07:45", "08:45", "09:36", "10:31", "11:36", "12:46", "13:46"
                                       , "14:46", "15:51", "16:36", "17:36", "18:36", "19:36", "20:36", "21:36"],
-  
+
+      "Kolejowa (01)": ["06:41", "07:41", "08:41", "11:41", "13:11", "14:11", "15:11", "16:11", "17:11", "18:11"],
+
+      "Dzielna (02)": ["06:42", "07:42", "08:42", "11:42", "13:12", "14:12", "15:12", "16:12", "17:12", "18:12"],
+
+      "Kościuszki (02)": ["06:45", "07:45", "08:45", "11:45", "13:15", "14:15", "15:15", "16:15", "17:15", "18:15"],
+
+      "Grabskiego (02)": ["06:46", "07:46", "08:46", "11:46", "13:16", "14:16", "15:16", "16:16", "17:16", "18:16"],
+
+      "PKP Sulejówek (02)": ["06:50", "07:50", "08:50", "11:50", "13:20", "14:20", "15:20", "16:20", "17:20", "18:20"],
+
+      "Bogusławskiego (02)": ["06:50", "07:50", "08:50", "11:50", "13:20", "14:20", "15:20", "16:20", "17:20", "18:20"],
+
+      "Iwaszkiewicza (01)": ["06:51", "07:51", "08:51", "11:51", "13:21", "14:21", "15:21", "16:21", "17:21", "18:21"],
+
+      "Starzyńskiego (02)": ["06:52", "07:52", "08:52", "11:52", "13:22", "14:22", "15:22", "16:22", "17:22", "18:22"],
+
+      "Batorego (01)": ["06:53", "07:53", "08:53", "11:53", "13:23", "14:23", "15:23", "16:23", "17:23", "18:23"],
+
+      "Szklarniowa |02|": ["06:55", "07:55", "08:55", "11:55", "13:25", "14:25", "15:25", "16:25", "17:25", "18:25"],
+
+      "Przejazd |02|": ["06:57", "07:57", "08:57", "11:57", "13:27", "14:27", "15:27", "16:27", "17:27", "18:27"],
+
+      "Ogrodnicza (04)": ["07:00", "08:00", "09:00", "12:00", "13:30", "14:30", "15:30", "16:30", "17:30", "18:30"],
+
+      "Szkolna (01)": ["07:02", "08:02", "09:02", "12:02", "13:32", "14:32", "15:32", "16:32", "17:32", "18:32"],
+
+      "Dębów (02)": ["07:04", "08:04", "09:04", "12:04", "13:34", "14:34", "15:34", "16:34", "17:34", "18:34"],
+
+      "Miłego Dnia (02)": ["07:05", "08:05", "09:05", "12:05", "13:35", "14:35", "15:35", "16:35", "17:35", "18:35"],
+
+      "Michałówek-Pętla (01)": ["07:06", "08:06", "09:06", "12:06", "13:36", "14:36", "15:36", "16:36", "17:36", "18:36"],
+
+      "Michałówek-Pętla |01|": ["06:20", "07:20", "08:20", "11:20", "12:50", "13:50", "14:50", "15:50", "16:50", "17:50"],
+
+      "Miłego Dnia (01)": ["06:21", "07:21", "08:21", "11:21", "12:51", "13:51", "14:51", "15:51", "16:51", "17:51"],
+
+      "Dębów (01)": ["06:22", "07:22", "08:22", "11:22", "12:52", "13:52", "14:52", "15:52", "16:52", "17:52"],
+
+      "Szkolna (02)": ["06:24", "07:24", "08:24", "11:24", "12:54", "13:54", "14:54", "15:54", "16:54", "17:54"],
+
+      "Ogrodnicza (02)": ["06:26", "07:26", "08:26", "11:26", "12:56", "13:56", "14:56", "15:56", "16:56", "17:56"],
+
+      "Przejazd |01|": ["06:29", "07:29", "08:29", "11:29", "12:59", "13:59", "14:59", "15:59", "16:59", "17:59"],
+
+      "Szklarniowa |01|": ["06:31", "07:31", "08:31", "11:31", "13:01", "14:01", "15:01", "16:01", "17:01", "18:01"],
+
+      "Batorego (02)": ["06:32", "07:32", "08:32", "11:32", "13:02", "14:02", "15:02", "16:02", "17:02", "18:02"],
+
+      "Starzyńskiego (01)": ["06:33", "07:33", "08:33", "11:33", "13:03", "14:03", "15:03", "16:03", "17:03", "18:03"],
+
+      "Iwaszkiewicza (02)": ["06:34", "07:34", "08:34", "11:34", "13:04", "14:04", "15:04", "16:04", "17:04", "18:04"],
+
+      "Bogusławskiego (01)": ["06:35", "07:35", "08:35", "11:35", "13:05", "14:05", "15:05", "16:05", "17:05", "18:05"],
+
+      "PKP Sulejówek (01)": ["06:36", "07:36", "08:36", "11:36", "13:06", "14:06", "15:06", "16:06", "17:06", "18:06"],
+
+      "Grabskiego (01)": ["06:38", "07:38", "08:38", "11:38", "13:08", "14:08", "15:08", "16:08", "17:08", "18:08"],
+
+      "Kościuszki (01)": ["06:39", "07:39", "08:39", "11:39", "13:09", "14:09", "15:09", "16:09", "17:09", "18:09"],
+
+      "Dzielna (01)": ["06:40", "07:40", "08:40", "11:40", "13:10", "14:10", "15:10", "16:10", "17:10", "18:10"],
+
+      "Kolejowa (01)": ["06:41", "07:41", "08:41", "11:41", "13:11", "14:11", "15:11", "16:11", "17:11", "18:11"],
 };
    
     const lineSelect = document.getElementById("lineSelect");
