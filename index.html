@@ -622,98 +622,134 @@ function showRoute(time) {
 </script>
   
   
-  <script>
+ <script>
 if ('serviceWorker' in navigator) {
 
-  window.addEventListener('load', () => {
+  let oldVersion = null;
+  let checking = false;
 
-    navigator.serviceWorker.register('service-worker.js')
-      .then(registration => {
+  navigator.serviceWorker.register('service-worker.js')
+    .then(() => {
+      checkForUpdate();
+      setInterval(checkForUpdate, 30000);
+    })
+    .catch(error => {
+      console.log("Błąd Service Workera:", error);
+    });
 
-        registration.update();
 
-        registration.addEventListener('updatefound', () => {
+  async function checkForUpdate() {
 
-          const newWorker = registration.installing;
+    if (checking) return;
 
-          if (!newWorker) return;
+    checking = true;
 
-          showUpdateBar();
+    try {
 
-          newWorker.addEventListener('statechange', () => {
-
-            if (newWorker.state === 'installed') {
-
-              if (navigator.serviceWorker.controller) {
-                finishUpdateBar();
-              }
-
-            }
-
-          });
-
-        });
-
-      })
-      .catch(error => {
-        console.log('Błąd aktualizacji:', error);
+      const response = await fetch('index.html?check=' + Date.now(), {
+        cache: 'no-store'
       });
 
-  });
+      const html = await response.text();
 
-}
+      const version = await createHash(html);
 
+      if (oldVersion === null) {
+        oldVersion = version;
+      }
 
-function showUpdateBar() {
+      else if (version !== oldVersion) {
 
-  const bar = document.getElementById('update-bar');
-  const fill = document.getElementById('update-progress-fill');
-  const text = document.getElementById('update-text');
+        oldVersion = version;
 
-  bar.style.display = 'block';
+        showUpdateBar();
 
-  text.textContent = 'Pobieram aktualizację…';
+      }
 
-  fill.style.width = '10%';
-
-  let progress = 10;
-
-  const interval = setInterval(() => {
-
-    if (progress < 90) {
-      progress += 10;
-      fill.style.width = progress + '%';
+    } catch (error) {
+      console.log("Nie udało się sprawdzić aktualizacji:", error);
     }
 
-  }, 300);
+    checking = false;
+  }
 
-  bar.dataset.interval = interval;
+
+  async function createHash(text) {
+
+    const data = new TextEncoder().encode(text);
+
+    const hashBuffer = await crypto.subtle.digest(
+      'SHA-256',
+      data
+    );
+
+    const hashArray = Array.from(
+      new Uint8Array(hashBuffer)
+    );
+
+    return hashArray
+      .map(b => b.toString(16).padStart(2, '0'))
+      .join('');
+  }
+
+
+  function showUpdateBar() {
+
+    let bar = document.getElementById('update-bar');
+
+    if (!bar) {
+
+      bar = document.createElement('div');
+
+      bar.id = 'update-bar';
+
+      bar.innerHTML = `
+        <div id="update-text">
+          Pobieram aktualizację…
+        </div>
+
+        <div id="update-progress">
+          <div id="update-progress-fill"></div>
+        </div>
+      `;
+
+      document.body.appendChild(bar);
+    }
+
+    bar.style.display = 'block';
+
+    const fill =
+      document.getElementById('update-progress-fill');
+
+    let progress = 0;
+
+    const timer = setInterval(() => {
+
+      progress += 2;
+
+      if (progress >= 100) {
+
+        progress = 100;
+
+        clearInterval(timer);
+
+        document.getElementById('update-text').textContent =
+          '✓ Aktualizacja gotowa';
+
+        setTimeout(() => {
+
+          window.location.reload(true);
+
+        }, 700);
+      }
+
+      fill.style.width = progress + '%';
+
+    }, 50);
+  }
 
 }
-
-
-function finishUpdateBar() {
-
-  const bar = document.getElementById('update-bar');
-  const fill = document.getElementById('update-progress-fill');
-  const text = document.getElementById('update-text');
-
-  clearInterval(Number(bar.dataset.interval));
-
-  fill.style.width = '100%';
-
-  text.textContent = '✓ Aktualizacja gotowa';
-
-  setTimeout(() => {
-
-    bar.style.display = 'none';
-
-    window.location.reload();
-
-  }, 800);
-
-}
-  </script>
+ </script>
    <script>
   const intro = document.getElementById('intro-screen');
   const enterBtn = document.getElementById('enter-btn');
