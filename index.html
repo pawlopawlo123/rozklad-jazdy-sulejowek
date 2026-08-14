@@ -622,12 +622,98 @@ function showRoute(time) {
 </script>
   
   
-  </script>
   <script>
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('service-worker.js');
-  }
-</script>
+
+  window.addEventListener('load', () => {
+
+    navigator.serviceWorker.register('service-worker.js')
+      .then(registration => {
+
+        registration.update();
+
+        registration.addEventListener('updatefound', () => {
+
+          const newWorker = registration.installing;
+
+          if (!newWorker) return;
+
+          showUpdateBar();
+
+          newWorker.addEventListener('statechange', () => {
+
+            if (newWorker.state === 'installed') {
+
+              if (navigator.serviceWorker.controller) {
+                finishUpdateBar();
+              }
+
+            }
+
+          });
+
+        });
+
+      })
+      .catch(error => {
+        console.log('Błąd aktualizacji:', error);
+      });
+
+  });
+
+}
+
+
+function showUpdateBar() {
+
+  const bar = document.getElementById('update-bar');
+  const fill = document.getElementById('update-progress-fill');
+  const text = document.getElementById('update-text');
+
+  bar.style.display = 'block';
+
+  text.textContent = 'Pobieram aktualizację…';
+
+  fill.style.width = '10%';
+
+  let progress = 10;
+
+  const interval = setInterval(() => {
+
+    if (progress < 90) {
+      progress += 10;
+      fill.style.width = progress + '%';
+    }
+
+  }, 300);
+
+  bar.dataset.interval = interval;
+
+}
+
+
+function finishUpdateBar() {
+
+  const bar = document.getElementById('update-bar');
+  const fill = document.getElementById('update-progress-fill');
+  const text = document.getElementById('update-text');
+
+  clearInterval(Number(bar.dataset.interval));
+
+  fill.style.width = '100%';
+
+  text.textContent = '✓ Aktualizacja gotowa';
+
+  setTimeout(() => {
+
+    bar.style.display = 'none';
+
+    window.location.reload();
+
+  }, 800);
+
+}
+  </script>
    <script>
   const intro = document.getElementById('intro-screen');
   const enterBtn = document.getElementById('enter-btn');
